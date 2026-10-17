@@ -1,0 +1,130 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>الفرح</title><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg">
+<meta name="theme-color" content="#a85a72"><meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="icon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#3a2a30;--rose:#a85a72;--gold:#b8955a;--cream:#fbf6ef;--card:#fff;--line:#eadfd3;--soft:#f4e8ec;--ok:#5b8a6b;--bad:#b4493f}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font:500 15px/1.6 Tajawal,system-ui,sans-serif;padding-bottom:84px}
+main{max-width:720px;margin:auto;padding:16px}h2{font-size:17px;margin:20px 0 8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:10px}
+.hero{background:var(--rose);color:#fff;border:0;text-align:center;padding:26px 14px}.hero b{font-size:56px;font-weight:800;display:block;line-height:1.1}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}.sm{font-size:13px;color:#8a757c}
+.bar{height:8px;background:var(--soft);border-radius:9px;overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;background:var(--gold)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.grid .card{margin:0}.n{font-weight:800;font-size:18px}
+button,.btn{font:inherit;font-weight:700;border:1px solid var(--rose);background:#fff;color:var(--rose);border-radius:10px;padding:8px 12px;cursor:pointer}
+button.p{background:var(--rose);color:#fff}button.x{border-color:var(--bad);color:var(--bad)}
+.qa{display:flex;gap:6px;overflow:auto}.qa button{white-space:nowrap}
+nav{position:fixed;bottom:0;inset-inline:0;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom)}
+nav a{flex:1;max-width:140px;text-align:center;padding:8px 0;font-size:12px;color:#8a757c;cursor:pointer}nav a.on{color:var(--rose);font-weight:800}nav a span{display:block;font-size:20px}
+.late{color:var(--bad)}.ok{color:var(--ok)}.tag{font-size:12px;background:var(--soft);color:var(--rose);border-radius:8px;padding:1px 8px}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}.cal div{padding:8px 0;border-radius:10px;cursor:pointer;position:relative}
+.cal .h{cursor:default;font-size:12px;color:#8a757c}.cal .s{background:var(--rose);color:#fff}.cal .d::after{content:"";position:absolute;bottom:2px;left:46%;width:5px;height:5px;border-radius:9px;background:var(--gold)}
+.cal .w{outline:2px solid var(--gold)}
+dialog{border:0;border-radius:16px;width:min(92vw,420px);padding:16px;color:var(--ink)}dialog::backdrop{background:#0006}
+label{display:block;font-size:13px;margin-top:8px}input,select,textarea{width:100%;font:inherit;padding:8px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.off{background:var(--gold);color:#fff;text-align:center;font-size:12px;padding:2px}
+@media(min-width:900px){nav{top:0;bottom:auto;inset-inline:auto 0;width:100px;height:100vh;flex-direction:column;justify-content:flex-start;border-top:0;border-inline-start:1px solid var(--line)}nav a{max-width:none;flex:0;padding:16px 0}body{padding:0 100px 0 0}}
+</style></head><body><div id="off" class="off" hidden>أوفلاين — التعديلات محفوظة وهتتزامن لما النت يرجع</div><main id="app"></main>
+<nav id="nav"></nav><dialog id="dlg"></dialog>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script type="module">
+const SB_URL='https://joxgqdogavgxojpsqpex.supabase.co',SB_KEY='sb_publishable_Dzckomof1AJEBSEvQ32Khg_ZmBEqtNv'; // Supabase Project URL + anon key
+const WEDDING='2027-01-22',$=s=>document.querySelector(s),uid=()=>crypto.randomUUID();
+const sb=SB_URL&&window.supabase?supabase.createClient(SB_URL,SB_KEY):null;
+const SEED=[['bride',null,['فستان العروسة (شامل التعديلات)','ميكب وتصفيف الشعر','جزمة العروسة','الأوضة اللي هتتجهز فيها']],
+['groom',null,['بدلة العريس','قميص','كرافتة','الحلاقة والتجهيز','جزمة العريس']],
+['wed',null,['القاعة','البوفيه والأكل','السيشن (التصوير)','رسوم دخول المأذون','مصاريف المأذون','منديل كتب الكتاب','البصامة']],
+['apt','المطبخ',['وحدات المطبخ (يونتس جاهزة)','تركيب الوحدات','إضاءة المطبخ']],
+['apt','الريسبشن',['سفرة وكراسي','بوفيه','ركنة','تي في يونت','جزامة','مراية','إضاءة الريسبشن']],
+['apt','أوضة النوم',['أوضة النوم','إضاءة أوضة النوم','مرتبة','مرتبة تطرية']],
+['apt','الأوضة التانية',['سرير','مكتب','دولاب صغير','إضاءة الأوضة']],
+['men',null,['تيشريتات','قمصان','جينز وبناطيل كاجوال','بنطلون رسمي','تريننج ولبس مريح','لبس بيت','ملابس داخلية','شرابات','بيجامات','شبشب','حذاء كاجوال','جاكيت وسويت شريت','برفان وعناية شخصية']],
+['move',null,['إيجار أول شهر + مقدم وتأمين الشقة','عمولة السمسار','نقل العفش','توصيلات واشتراكات (كهربا • مياه • نت)','تنظيف وتجهيز الشقة']],
+['res',null,['احتياطي الطوارئ']],
+['month',null,['الإيجار الشهري','الأكل والبقالة','الفواتير والإنترنت','المواصلات','مصروف شخصي للعروسة','مصروف شخصي للعريس','مساعدة الأهل','القسط الشهري','ادخار للطوارئ','مصاريف متنوعة']]];
+const SEC={bride:'العروسة',groom:'العريس',wed:'الفرح',apt:'الشقة',men:'اللبس الرجالي',move:'مصاريف أثناء الجواز',res:'احتياطي الطوارئ',month:'المصاريف الشهرية بعد الجواز'};
+const ST={todo:'لسه',doing:'شغالين عليها',done:'تمت'},WHO={a:0,b:0,t:'سوا'};
+const db=await new Promise(r=>{const q=indexedDB.open('farah',1);q.onupgradeneeded=()=>q.result.createObjectStore('r',{keyPath:'id'});q.onsuccess=()=>r(q.result)});
+const tx=(m,f)=>new Promise(r=>{const t=db.transaction('r',m),q=f(t.objectStore('r'));t.oncomplete=()=>r(q.result)});
+let R=[],V='home',CM=0,CD=null,wid=localStorage.wid||null,code=localStorage.code||'',me=localStorage.me||'a';
+const load=async()=>{R=(await tx('readonly',s=>s.getAll())).filter(r=>!r.deleted)},K=k=>R.filter(r=>r.kind==k),D=r=>r.data;
+const put=o=>tx('readwrite',s=>s.put(o));
+const save=async(kind,data,id)=>{await put({id:id||uid(),kind,data,updated_at:new Date().toISOString(),deleted:false,dirty:1});await load();render();sync()};
+const rm=async r=>{await put({...r,deleted:true,updated_at:new Date().toISOString(),dirty:1});await load();render();sync()};
+const cfg=()=>K('cfg')[0]||{id:null,data:{a:'العروسة',b:'العريس',have:0,save:0,bonus:0}};
+const nm=w=>w=='t'?'سوا':cfg().data[w];
+const log=t=>save('act',{t:`${nm(me)} ${t}`,at:new Date().toISOString()});
+async function sync(){if(!sb||!wid||!navigator.onLine)return;try{
+const all=await tx('readonly',s=>s.getAll()),dirty=all.filter(r=>r.dirty);
+if(dirty.length){const {error}=await sb.from('records').upsert(dirty.map(({dirty:_,...r})=>({...r,wedding_id:wid})));if(error)throw error;for(const r of dirty)await put({...r,dirty:0})}
+const {data,error}=await sb.from('records').select('*').eq('wedding_id',wid);if(error)throw error;
+const loc=Object.fromEntries((await tx('readonly',s=>s.getAll())).map(r=>[r.id,r]));
+for(const r of data){const l=loc[r.id];if(!l||(!l.dirty&&r.updated_at>l.updated_at)||(l.dirty&&r.updated_at>l.updated_at))await put({...r,dirty:0})}
+await load();render()}catch(e){console.warn('sync',e)}}
+// ---- helpers
+const fmt=n=>Math.round(n||0).toLocaleString('ar-EG'),today=()=>{const d=new Date();return new Date(d.getFullYear(),d.getMonth(),d.getDate())};
+const days=s=>Math.round((new Date(s+'T00:00')-today())/864e5);
+const when=s=>{const d=days(s);return d==0?'<b>النهارده</b>':d>0?`باقي ${fmt(d)} يوم`:`<span class="late">متأخر ${fmt(-d)} يوم</span>`};
+const dstr=s=>new Date(s+'T00:00').toLocaleDateString('ar-EG',{day:'numeric',month:'long',year:'numeric'});
+const cost=i=>+(D(i).act||D(i).est)||0,paid=i=>K('pay').filter(p=>D(p).item==i.id).reduce((a,p)=>a+(+D(p).amt||0),0);
+const sum=l=>l.reduce((a,i)=>({e:a.e+(+D(i).est||0),c:a.c+cost(i),p:a.p+paid(i)}),{e:0,c:0,p:0});
+const items=s=>K('item').filter(i=>D(i).sec==s);
+const need=()=>sum(K('item').filter(i=>D(i).sec!='month'));
+function form(title,f,ok,extra=''){const d=$('#dlg');d.innerHTML=`<form method="dialog"><h2>${title}</h2>${f.map(x=>`<label>${x.l}${x.o?`<select name="${x.k}">${x.o.map(([v,t])=>`<option value="${v}" ${v==x.v?'selected':''}>${t}</option>`).join('')}</select>`:`<input name="${x.k}" type="${x.t||'text'}" value="${x.v??''}">`}</label>`).join('')}${extra}<div class="row" style="margin-top:14px"><button class="p" value="ok">حفظ</button><button value="x">إلغاء</button></div></form>`;
+d.querySelector('form').onsubmit=e=>{if(e.submitter.value=='ok'){ok(Object.fromEntries(new FormData(e.target)))}};d.showModal()}
+const itemOpts=()=>[['','— بدون —'],...K('item').filter(i=>D(i).sec!='month').map(i=>[i.id,D(i).name])];
+const whoOpts=()=>[['a',nm('a')],['b',nm('b')],['t','سوا']];
+// ---- actions
+const addTask=(t)=>form(t?'تعديل مهمة':'مهمة جديدة',[{k:'title',l:'المهمة',v:t&&D(t).title},{k:'date',l:'التاريخ',t:'date',v:t&&D(t).date},{k:'time',l:'الوقت (اختياري)',t:'time',v:t&&D(t).time},{k:'who',l:'مين المسؤول',o:whoOpts(),v:t?D(t).who:me},{k:'status',l:'الحالة',o:Object.entries(ST),v:t?D(t).status:'todo'},{k:'item',l:'مرتبطة ببند',o:itemOpts(),v:t&&D(t).item},{k:'notes',l:'ملاحظات',v:t&&D(t).notes}],v=>{if(!v.title)return;save('task',v,t&&t.id);log((t?'عدّلت مهمة: ':'أضافت مهمة: ')+v.title)});
+const addItem=(i,sec)=>form(i?'تعديل بند':'بند جديد',[{k:'name',l:'البند',v:i&&D(i).name},{k:'sec',l:'القسم',o:Object.entries(SEC),v:i?D(i).sec:sec||'bride'},{k:'est',l:'تقديري',t:'number',v:i&&D(i).est},{k:'act',l:'فعلي',t:'number',v:i&&D(i).act},{k:'notes',l:'ملاحظات',v:i&&D(i).notes}],v=>{if(!v.name)return;save('item',{...(i?D(i):{}),...v,sub:i?D(i).sub:null},i&&i.id);log(`${i?'عدّلت':'أضافت'} بند: ${v.name}`)});
+const addPay=(it)=>form('دفعة جديدة',[{k:'item',l:'البند',o:itemOpts().slice(1),v:it&&it.id},{k:'amt',l:'المبلغ',t:'number'},{k:'date',l:'التاريخ',t:'date',v:new Date().toISOString().slice(0,10)},{k:'note',l:'ملاحظة'}],v=>{if(!+v.amt)return;save('pay',v);log(`دفعت ${fmt(v.amt)} جنيه لـ ${D(K('item').find(i=>i.id==v.item)||{data:{}}).name}`)});
+const openItem=id=>{const i=K('item').find(x=>x.id==id),ps=K('pay').filter(p=>D(p).item==id);
+form(D(i).name,[{k:'est',l:'تقديري',t:'number',v:D(i).est},{k:'act',l:'فعلي',t:'number',v:D(i).act},{k:'notes',l:'ملاحظات',v:D(i).notes}],v=>{save('item',{...D(i),...v},id);log('عدّلت ميزانية '+D(i).name)},
+`<h2>الدفعات</h2>${ps.map(p=>`<div class="row sm">${dstr(D(p).date)} — ${fmt(D(p).amt)}<a onclick="rm(K('pay').find(x=>x.id=='${p.id}'))">🗑</a></div>`).join('')||'<div class="sm">لسه مفيش دفعات</div>'}<div class="row" style="margin-top:8px"><b>متبقي: ${fmt(cost(i)-paid(i))}</b><a class="btn" onclick="dlg.close();addPay(K('item').find(x=>x.id=='${id}'))">+ دفعة</a></div>`)};
+Object.assign(window,{rm,K,D,addPay,dlg:$('#dlg')});
+// ---- views
+const taskRow=t=>{const d=D(t);return `<div class="card row" onclick="addTask(K('task').find(x=>x.id=='${t.id}'))"><div><b ${d.status=='done'?'style="text-decoration:line-through"':''}>${d.title}</b><div class="sm">${dstr(d.date)}${d.time?' • '+d.time:''} • <span class="tag">${nm(d.who)}</span></div></div><div class="sm">${d.status=='done'?'<span class="ok">✓ تمت</span>':when(d.date)}</div></div>`};
+const pct=(a,b)=>b?Math.min(100,Math.round(a/b*100)):0;
+const V_={
+home(){const T=K('task').filter(t=>D(t).status!='done').sort((a,b)=>D(a).date>D(b).date?1:-1),n=need(),ts=K('task'),dn=ts.filter(t=>D(t).status=='done').length,late=T.filter(t=>days(D(t).date)<0);
+return `<div class="card hero">💍 ${dstr(WEDDING)}<b>${fmt(Math.max(0,days(WEDDING)))}</b>يوم على الفرح</div>
+<div class="qa"><button onclick="addTask()">+ مهمة</button><button onclick="addItem()">+ بند</button><button onclick="addPay()">+ دفعة</button><button onclick="nav('cal')">📅 الجدول</button></div>
+<h2>الجاي ${late.length?`<span class="late sm">(${fmt(late.length)} متأخرة)</span>`:''}</h2>${T.slice(0,5).map(taskRow).join('')||'<div class="card sm">مفيش مهام — ضيفوا أول مهمة</div>'}
+<h2>الميزانية</h2><div class="grid"><div class="card">تقديري<div class="n">${fmt(n.e)}</div></div><div class="card">فعلي<div class="n">${fmt(n.c)}</div></div><div class="card">مدفوع<div class="n">${fmt(n.p)}</div></div><div class="card">متبقي<div class="n">${fmt(n.c-n.p)}</div></div></div>
+<h2>التقدم</h2><div class="card"><div class="sm">المهام ${fmt(dn)}/${fmt(ts.length)}</div><div class="bar"><i style="width:${pct(dn,ts.length)}%"></i></div><div class="sm">المدفوع من الميزانية</div><div class="bar"><i style="width:${pct(n.p,n.c)}%"></i></div></div>
+<h2>مهام</h2><div class="grid">${['a','b','t'].map(w=>`<div class="card sm">${nm(w)}<div class="n">${fmt(T.filter(t=>D(t).who==w).length)}</div></div>`).join('')}</div>
+<h2>آخر التحديثات</h2>${K('act').sort((a,b)=>D(b).at>D(a).at?1:-1).slice(0,6).map(a=>`<div class="sm">• ${D(a).t}</div>`).join('')}`},
+cal(){const b=new Date(today().getFullYear(),today().getMonth()+CM,1),y=b.getFullYear(),m=b.getMonth(),dim=new Date(y,m+1,0).getDate(),off=(b.getDay()+1)%7,p2=n=>String(n).padStart(2,'0');
+const ev={};K('task').forEach(t=>(ev[D(t).date]??=[]).push(`✅ ${D(t).title}`));K('pay').forEach(p=>(ev[D(p).date]??=[]).push(`💰 ${fmt(D(p).amt)} — ${(K('item').find(i=>i.id==D(p).item)||{data:{}}).data.name||''}`));(ev[WEDDING]??=[]).push('💍 يوم الفرح');
+let c=['س','ح','ن','ث','ر','خ','ج'].map(x=>`<div class="h">${x}</div>`).join('')+'<div></div>'.repeat(off);
+for(let d=1;d<=dim;d++){const s=`${y}-${p2(m+1)}-${p2(d)}`;c+=`<div class="${ev[s]?'d ':''}${s==CD?'s ':''}${s==WEDDING?'w':''}" onclick="CD='${s}';render()">${fmt(d)}</div>`}
+return `<div class="row"><button onclick="cm(-1)">›</button><b>${b.toLocaleDateString('ar-EG',{month:'long',year:'numeric'})}</b><button onclick="cm(1)">‹</button></div><div class="card cal" style="margin-top:8px">${c}</div>${CD?`<h2>${dstr(CD)} — ${when(CD)}</h2>${(ev[CD]||['مفيش حاجة في اليوم ده']).map(e=>`<div class="card">${e}</div>`).join('')}<button class="p" onclick="addTask()">+ مهمة</button>`:''}`},
+budget(){const g=cfg().data,have=(+g.have||0)+(+g.save||0)+(+g.bonus||0),n=need();let h=`<div class="grid"><div class="card">اللي معانا<div class="n">${fmt(have)}</div></div><div class="card">اللي محتاجينه<div class="n">${fmt(n.c)}</div></div></div><div class="card row"><b>الفرق</b><span class="n ${have-n.c<0?'late':'ok'}">${fmt(have-n.c)}</span></div><button onclick="editHave()">تعديل اللي معانا</button><button class="p" onclick="addItem()">+ بند</button>`;
+for(const [s,t] of Object.entries(SEC)){const l=items(s),x=sum(l);h+=`<h2>${t} <span class="sm">${s=='month'?'(مش داخلة في الإجمالي)':`${fmt(x.c)} • مدفوع ${fmt(x.p)} • متبقي ${fmt(x.c-x.p)}`}</span></h2><div class="card">${l.map(i=>s=='month'?`<div class="row" onclick="addItem(K('item').find(x=>x.id=='${i.id}'))"><span>${D(i).name}</span><span class="sm">تقديري ${fmt(D(i).est)} • فعلي ${fmt(D(i).act)}</span></div>`:`<div onclick="openItem('${i.id}')" style="margin-bottom:8px"><div class="row"><span>${D(i).sub?`<span class="tag">${D(i).sub}</span> `:''}${D(i).name}</span><b>${fmt(cost(i)-paid(i))}</b></div><div class="bar"><i style="width:${pct(paid(i),cost(i))}%"></i></div></div>`).join('')}</div>`}return h},
+tasks(){return `<button class="p" onclick="addTask()">+ مهمة</button>`+['todo','doing','done'].map(s=>`<h2>${ST[s]}</h2>`+K('task').filter(t=>D(t).status==s).sort((a,b)=>D(a).date>D(b).date?1:-1).map(taskRow).join('')).join('')},
+set(){return `<div class="card"><b>الأسماء</b><br><button onclick="editNames()">تعديل الأسماء</button><label>أنا<select onchange="localStorage.me=me=this.value;render()">${whoOpts().slice(0,2).map(([v,t])=>`<option value="${v}" ${v==me?'selected':''}>${t}</option>`).join('')}</select></label></div>
+<div class="card"><b>كود الدعوة</b><div class="n">${code||(sb?'—':'وضع محلي (بدون Supabase)')}</div><div class="sm">ابعتي الكود لخطيبك علشان ينضم</div></div>
+<div class="card"><button onclick="sync()">🔄 مزامنة الآن</button> ${sb?'<button class="x" onclick="sb.auth.signOut().then(()=>{localStorage.clear();location.reload()})">خروج</button>':''}</div>`}};
+const editNames=()=>form('الأسماء',[{k:'a',l:'الاسم الأول',v:cfg().data.a},{k:'b',l:'الاسم التاني',v:cfg().data.b}],v=>save('cfg',{...cfg().data,...v},cfg().id));
+const editHave=()=>{const g=cfg().data;form('اللي معانا',[{k:'have',l:'المبلغ المتاح حاليًا',t:'number',v:g.have},{k:'save',l:'مدخرات متوقعة قبل الفرح',t:'number',v:g.save},{k:'bonus',l:'بونص يناير',t:'number',v:g.bonus}],v=>save('cfg',{...g,...v},cfg().id))};
+Object.assign(window,{addTask,addItem,openItem,editNames,editHave,sync,render:()=>render(),nav:v=>{V=v;render()},CD:null});
+function render(){$('#app').innerHTML=V_[V]();$('#nav').innerHTML=[['home','🏠','الرئيسية'],['cal','📅','الجدول'],['budget','💰','الميزانية'],['tasks','✅','المهام'],['set','⚙️','الإعدادات']].map(([k,i,t])=>`<a class="${V==k?'on':''}" onclick="nav('${k}')"><span>${i}</span>${t}</a>`).join('')}
+Object.defineProperty(window,'CD',{get:()=>CD,set:v=>CD=v});window.cm=d=>{CM+=d;render()};window.sb=sb;
+const offl=()=>$('#off').hidden=navigator.onLine;addEventListener('online',()=>{offl();sync()});addEventListener('offline',offl);offl();
+// ---- start / auth
+async function setupWedding(){let n=await new Promise(r=>form('أهلاً 💍',[{k:'n',l:'اسمك'},{k:'c',l:'كود الدعوة (لو خطيبك أنشأ المشروع) — سيبيه فاضي لإنشاء مشروع جديد'}],r));
+const {data,error}=n.c?await sb.rpc('join_wedding',{c:n.c.trim(),n:n.n}):await sb.rpc('create_wedding',{n:n.n});
+if(error)return alert('الكود غلط أو المشروع مكتمل');wid=localStorage.wid=data.id;code=localStorage.code=data.code;
+if(!n.c){for(const [sec,sub,l] of SEED)for(const name of l)await put({id:uid(),kind:'item',data:{sec,sub,name,est:0,act:0},updated_at:new Date().toISOString(),deleted:false,dirty:1});
+await put({id:uid(),kind:'cfg',data:{a:n.n,b:'خطيبي',have:0,save:0,bonus:0},updated_at:new Date().toISOString(),deleted:false,dirty:1});localStorage.me='a'}else localStorage.me=me='b';await sync()}
+async function boot(){await load();
+if(sb){const {data:{session}}=await sb.auth.getSession();
+if(!session&&!wid){const e=prompt('الإيميل'),p=prompt('كلمة السر (٦ حروف على الأقل)');let r=await sb.auth.signInWithPassword({email:e,password:p});if(r.error)r=await sb.auth.signUp({email:e,password:p});if(r.error)return alert(r.error.message);return boot()}
+if(session&&!wid){const {data:m}=await sb.from('members').select('wedding_id,weddings(code)').limit(1);if(m?.[0]){wid=localStorage.wid=m[0].wedding_id;code=localStorage.code=m[0].weddings.code}else await setupWedding();await load()}
+sb.channel('r').on('postgres_changes',{event:'*',schema:'public',table:'records'},sync).subscribe();sync()}
+else if(!K('item').length){for(const [sec,sub,l] of SEED)for(const name of l)await put({id:uid(),kind:'item',data:{sec,sub,name,est:0,act:0},updated_at:new Date().toISOString(),deleted:false,dirty:0});await put({id:uid(),kind:'cfg',data:{a:'العروسة',b:'العريس',have:0,save:0,bonus:0},updated_at:'',deleted:false,dirty:0});await load()}
+render()}
+boot();if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
+</script></body></html>
