@@ -4,299 +4,145 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-    <title>الفرح 💍</title>
+    <title>الفرح</title>
     <link rel="manifest" href="manifest.webmanifest">
     <link rel="icon" href="icon.svg">
-    <meta name="theme-color" content="#7c3d5e">
+    <meta name="theme-color" content="#a85a72">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="apple-touch-icon" href="icon.svg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://joxgqdogavgxojpsqpex.supabase.co">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;900&display=swap" rel="stylesheet"
-        media="print" onload="this.media='all'">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Tajawal:wght@400;500;700;800&display=swap"
+        rel="stylesheet">
     <style>
-        /* instant loader */
-        #splash {
-            position: fixed;
-            inset: 0;
-            background: linear-gradient(160deg, #2d0f20, #5c1f3e, #7c3d5e);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 99999;
-            transition: opacity .4s
-        }
-
-        #splash.out {
-            opacity: 0;
-            pointer-events: none
-        }
-
-        .spin {
-            width: 48px;
-            height: 48px;
-            border: 4px solid #ffffff30;
-            border-top-color: #fff;
-            border-radius: 50%;
-            animation: spin .8s linear infinite;
-            margin-bottom: 16px
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg)
-            }
-        }
-
-        #splash p {
-            color: #fff;
-            font-family: system-ui;
-            font-size: 14px;
-            opacity: .7
-        }
-
         :root {
-            --rose: #9b3d64;
-            --rose2: #c4607e;
-            --gold: #c9a84c;
-            --gold2: #e8c96d;
-            --cream: #fdf8f3;
+            --bg: #faf6f4;
+            --ink: #2b2226;
+            --mut: #8b7b82;
             --card: #fff;
-            --line: #ecddd6;
-            --soft: #faedf2;
-            --ink: #2d1f28;
-            --muted: #9a7d88;
-            --ok: #3d8b5e;
-            --bad: #c0392b;
-            --nav-h: 72px;
-            --radius: 18px;
-            --shadow: 0 4px 24px #9b3d6420;
-            --shadow2: 0 8px 32px #9b3d6430;
+            --line: #f0e4e7;
+            --rose: #b0526f;
+            --on: #fff;
+            --gold: #c29a5b;
+            --soft: #f6ecef;
+            --ok: #3f8f66;
+            --bad: #c2453b;
+            --sh: 0 1px 2px #0000000a, 0 12px 28px -14px #78334f40
+        }
+
+        [data-theme=dark] {
+            --bg: #16111a;
+            --ink: #f3eaee;
+            --mut: #a899a1;
+            --card: #211a26;
+            --line: #33283b;
+            --rose: #e58fab;
+            --on: #1b1218;
+            --gold: #d7b27a;
+            --soft: #2b2131;
+            --ok: #6fc596;
+            --bad: #ff8a7e;
+            --sh: 0 1px 2px #0006, 0 12px 28px -14px #000a;
+            color-scheme: dark
         }
 
         * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent
+            box-sizing: border-box
+        }
+
+        [hidden] {
+            display: none !important
         }
 
         body {
             margin: 0;
-            background: var(--cream);
+            background: var(--bg);
             color: var(--ink);
-            font: 500 15px/1.6 Tajawal, system-ui, sans-serif;
-            padding-bottom: calc(var(--nav-h) + 12px);
-            min-height: 100vh
+            font: 500 15px/1.6 'Plus Jakarta Sans', Tajawal, system-ui, sans-serif;
+            padding-bottom: 104px;
+            transition: background .2s, color .2s
         }
 
         main {
-            max-width: 740px;
+            max-width: 760px;
             margin: auto;
-            padding: 16px
+            padding: 8px 16px
         }
 
         h2 {
             font-size: 16px;
             font-weight: 800;
-            margin: 22px 0 10px;
-            color: var(--ink);
+            margin: 24px 0 10px
+        }
+
+        .top {
+            max-width: 760px;
+            margin: auto;
+            padding: 14px 16px 4px;
             display: flex;
-            align-items: center;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .top>b {
+            font-size: 20px;
+            font-weight: 800
+        }
+
+        .top span {
+            display: flex;
             gap: 6px
         }
 
-        /* ── CARDS ── */
+        .top button {
+            border: 0;
+            background: var(--card);
+            box-shadow: var(--sh);
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            font-size: 18px;
+            border-radius: 50%;
+            position: relative
+        }
+
+        .bd {
+            position: absolute;
+            top: -3px;
+            inset-inline-end: -3px;
+            background: var(--bad);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 800;
+            border-radius: 9px;
+            padding: 0 6px;
+            line-height: 18px
+        }
+
         .card {
             background: var(--card);
             border: 1px solid var(--line);
-            border-radius: var(--radius);
+            border-radius: 20px;
             padding: 16px;
             margin-bottom: 12px;
-            box-shadow: var(--shadow);
-            transition: transform .15s, box-shadow .15s
+            box-shadow: var(--sh)
         }
 
-        .card:active {
-            transform: scale(.99)
-        }
-
-        .hero-card {
-            background: linear-gradient(135deg, var(--rose) 0%, #6b2547 60%, #3d1530 100%);
+        .hero {
+            background: linear-gradient(135deg, #b0526f, #6b3358);
             color: #fff;
             border: 0;
             text-align: center;
-            padding: 32px 20px 28px;
-            position: relative;
-            overflow: hidden
+            padding: 28px 14px
         }
 
-        .hero-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
-        }
-
-        .hero-card .days-big {
-            font-size: 72px;
-            font-weight: 900;
-            line-height: 1;
+        .hero b {
+            font-size: 60px;
+            font-weight: 800;
             display: block;
-            background: linear-gradient(180deg, #fff 0%, var(--gold2) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text
+            line-height: 1.05;
+            margin: 6px 0
         }
 
-        .hero-card .days-label {
-            font-size: 18px;
-            font-weight: 700;
-            opacity: .9;
-            margin-top: 4px
-        }
-
-        .hero-card .date-sm {
-            font-size: 13px;
-            opacity: .7;
-            margin-top: 6px
-        }
-
-        /* ── STATS GRID ── */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-bottom: 12px
-        }
-
-        .stat-card {
-            background: var(--card);
-            border: 1px solid var(--line);
-            border-radius: 16px;
-            padding: 14px 16px;
-            box-shadow: var(--shadow)
-        }
-
-        .stat-label {
-            font-size: 12px;
-            color: var(--muted);
-            font-weight: 600;
-            margin-bottom: 4px
-        }
-
-        .stat-val {
-            font-size: 20px;
-            font-weight: 900;
-            color: var(--ink)
-        }
-
-        .stat-val.rose {
-            color: var(--rose)
-        }
-
-        .stat-val.gold {
-            color: var(--gold)
-        }
-
-        .stat-val.ok {
-            color: var(--ok)
-        }
-
-        .stat-val.bad {
-            color: var(--bad)
-        }
-
-        /* ── PROGRESS ── */
-        .prog-wrap {
-            margin: 6px 0 10px
-        }
-
-        .prog-label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            color: var(--muted);
-            margin-bottom: 5px
-        }
-
-        .bar {
-            height: 10px;
-            background: var(--soft);
-            border-radius: 99px;
-            overflow: hidden
-        }
-
-        .bar i {
-            display: block;
-            height: 100%;
-            border-radius: 99px;
-            background: linear-gradient(90deg, var(--gold), var(--rose2));
-            transition: width .6s cubic-bezier(.4, 0, .2, 1)
-        }
-
-        .bar.ok-bar i {
-            background: linear-gradient(90deg, #3d8b5e, #5dbf8a)
-        }
-
-        /* ── BUTTONS ── */
-        button,
-        .btn {
-            font: 700 14px/1 Tajawal, system-ui;
-            border: 1.5px solid var(--rose);
-            background: #fff;
-            color: var(--rose);
-            border-radius: 12px;
-            padding: 10px 16px;
-            cursor: pointer;
-            transition: all .15s;
-            white-space: nowrap
-        }
-
-        button:hover {
-            background: var(--soft)
-        }
-
-        button.p {
-            background: linear-gradient(135deg, var(--rose), var(--rose2));
-            color: #fff;
-            border-color: transparent;
-            box-shadow: 0 4px 12px #9b3d6440
-        }
-
-        button.p:hover {
-            opacity: .9
-        }
-
-        button.g {
-            background: linear-gradient(135deg, var(--gold), var(--gold2));
-            color: #fff;
-            border-color: transparent
-        }
-
-        button.x {
-            border-color: var(--bad);
-            color: var(--bad)
-        }
-
-        button.x:hover {
-            background: #fff5f5
-        }
-
-        .qa {
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            padding-bottom: 4px;
-            scrollbar-width: none;
-            margin-bottom: 4px
-        }
-
-        .qa::-webkit-scrollbar {
-            display: none
-        }
-
-        /* ── ROWS ── */
         .row {
             display: flex;
             justify-content: space-between;
@@ -305,693 +151,677 @@
         }
 
         .sm {
-            font-size: 12.5px;
-            color: var(--muted)
+            font-size: 13px;
+            color: var(--mut)
         }
 
-        .tag {
-            font-size: 11px;
+        .bar {
+            height: 8px;
             background: var(--soft);
-            color: var(--rose);
-            border-radius: 8px;
-            padding: 2px 9px;
-            font-weight: 700
+            border-radius: 9px;
+            overflow: hidden;
+            margin: 8px 0
         }
 
-        .late {
-            color: var(--bad);
-            font-weight: 700
+        .bar i {
+            display: block;
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold), var(--rose));
+            border-radius: 9px;
+            transition: width .4s
         }
 
-        .ok-t {
-            color: var(--ok);
-            font-weight: 700
+        .g2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 12px;
+            margin-bottom: 12px
         }
 
-        /* ── TASK ROW ── */
-        .task-row {
-            padding: 12px 14px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 10px;
-            background: var(--card);
-            border: 1px solid var(--line);
-            border-radius: 14px;
-            margin-bottom: 8px;
-            box-shadow: var(--shadow);
-            transition: box-shadow .15s
+        .g2 .card {
+            margin: 0
         }
 
-        .task-row:hover {
-            box-shadow: var(--shadow2)
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px
         }
 
-        .task-row b {
-            font-size: 14px
+        .grid .card {
+            margin: 0
         }
 
-        .task-row.done-row b {
-            text-decoration: line-through;
-            color: var(--muted)
+        .n {
+            font-weight: 800;
+            font-size: 22px
         }
 
-        .task-status {
-            font-size: 11px;
+        button,
+        .btn {
+            font: inherit;
             font-weight: 700;
-            padding: 3px 10px;
-            border-radius: 20px;
+            border: 1px solid var(--line);
+            background: var(--card);
+            color: var(--rose);
+            border-radius: 999px;
+            padding: 7px 16px;
+            cursor: pointer
+        }
+
+        button.p {
+            background: var(--rose);
+            color: var(--on);
+            border-color: var(--rose)
+        }
+
+        button.x {
+            color: var(--bad)
+        }
+
+        .qa {
+            display: flex;
+            gap: 8px;
+            overflow: auto;
+            margin: 14px 0
+        }
+
+        .qa button {
             white-space: nowrap
         }
 
-        .status-todo {
-            background: #fff3e0;
-            color: #e67e22
-        }
-
-        .status-doing {
-            background: #e3f2fd;
-            color: #1976d2
-        }
-
-        .status-done {
-            background: #e8f5e9;
-            color: var(--ok)
-        }
-
-        /* ── NAV ── */
         nav {
             position: fixed;
-            bottom: 0;
-            inset-inline: 0;
-            background: #fff;
-            border-top: 1px solid var(--line);
+            bottom: 12px;
+            inset-inline: 12px;
+            max-width: 520px;
+            margin: auto;
+            background: color-mix(in srgb, var(--card) 88%, transparent);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--line);
+            box-shadow: var(--sh);
+            border-radius: 26px;
             display: flex;
-            justify-content: center;
-            padding-bottom: env(safe-area-inset-bottom);
-            box-shadow: 0 -4px 24px #00000012;
-            z-index: 100;
-            height: var(--nav-h)
+            padding: 4px 6px calc(4px + env(safe-area-inset-bottom))
         }
 
         nav a {
             flex: 1;
-            max-width: 120px;
             text-align: center;
-            padding: 10px 0 6px;
+            padding: 7px 0;
             font-size: 11px;
-            color: var(--muted);
+            color: var(--mut);
             cursor: pointer;
-            transition: color .15s;
-            font-weight: 600;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2px
-        }
-
-        nav a .ico {
-            font-size: 22px;
-            transition: transform .2s
+            border-radius: 20px
         }
 
         nav a.on {
-            color: var(--rose)
+            color: var(--rose);
+            font-weight: 800;
+            background: var(--soft)
         }
 
-        nav a.on .ico {
-            transform: scale(1.2)
+        nav a span {
+            display: block;
+            font-size: 19px
         }
 
-        /* ── CALENDAR ── */
+        .late {
+            color: var(--bad)
+        }
+
+        .ok {
+            color: var(--ok)
+        }
+
+        .tag {
+            font-size: 12px;
+            background: var(--soft);
+            color: var(--rose);
+            border-radius: 999px;
+            padding: 1px 10px
+        }
+
         .cal {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 3px;
+            gap: 4px;
             text-align: center
         }
 
         .cal div {
-            padding: 8px 2px;
-            border-radius: 10px;
+            padding: 9px 0;
+            border-radius: 14px;
             cursor: pointer;
-            position: relative;
-            font-size: 13px;
-            transition: background .15s
-        }
-
-        .cal div:hover {
-            background: var(--soft)
+            position: relative
         }
 
         .cal .h {
             cursor: default;
-            font-size: 11px;
-            color: var(--muted);
-            font-weight: 700;
-            padding: 4px 2px
+            font-size: 12px;
+            color: var(--mut)
         }
 
         .cal .s {
-            background: linear-gradient(135deg, var(--rose), var(--rose2));
-            color: #fff;
-            font-weight: 800
+            background: var(--rose);
+            color: var(--on)
         }
 
         .cal .d::after {
-            content: '';
+            content: "";
             position: absolute;
             bottom: 3px;
-            left: 50%;
-            transform: translateX(-50%);
+            left: calc(50% - 2px);
             width: 5px;
             height: 5px;
-            border-radius: 50%;
+            border-radius: 9px;
             background: var(--gold)
         }
 
         .cal .w {
-            outline: 2px solid var(--gold);
-            outline-offset: 1px;
-            font-weight: 800
+            outline: 2px solid var(--gold)
         }
 
-        /* ── DIALOG / MODAL ── */
+        .board {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 8px
+        }
+
+        .col {
+            flex: 0 0 82%;
+            max-width: 320px;
+            scroll-snap-align: start;
+            background: var(--soft);
+            border-radius: 22px;
+            padding: 10px;
+            min-height: 260px
+        }
+
+        .col h3 {
+            margin: 6px 8px 10px;
+            font-size: 15px
+        }
+
+        .col .card {
+            margin-bottom: 10px;
+            cursor: grab;
+            box-shadow: none
+        }
+
+        details>summary {
+            cursor: pointer;
+            list-style: none
+        }
+
+        details.card details {
+            border-top: 1px dashed var(--line);
+            padding: 10px 0
+        }
+
+        .tot {
+            background: var(--soft);
+            border-radius: 14px;
+            padding: 10px;
+            margin: 10px 0
+        }
+
+        .tk {
+            padding: 4px 0;
+            cursor: pointer
+        }
+
         dialog {
             border: 0;
-            border-radius: 22px;
-            width: min(94vw, 440px);
-            padding: 0;
+            border-radius: 24px;
+            width: min(92vw, 440px);
+            max-height: 88vh;
+            padding: 20px;
+            background: var(--card);
             color: var(--ink);
-            box-shadow: 0 24px 64px #00000030
+            box-shadow: var(--sh)
         }
 
         dialog::backdrop {
-            background: #00000060;
-            backdrop-filter: blur(4px)
-        }
-
-        .dlg-inner {
-            padding: 20px 20px 16px
-        }
-
-        .dlg-title {
-            font-size: 17px;
-            font-weight: 800;
-            margin: 0 0 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px
+            background: #0008;
+            backdrop-filter: blur(2px)
         }
 
         label {
             display: block;
             font-size: 13px;
-            font-weight: 600;
-            color: var(--muted);
-            margin-top: 12px;
-            margin-bottom: 3px
+            color: var(--mut);
+            margin-top: 10px
         }
 
         input,
         select,
         textarea {
             width: 100%;
-            font: 500 14px/1.4 Tajawal, system-ui;
+            font: inherit;
+            color: var(--ink);
             padding: 10px 12px;
-            border: 1.5px solid var(--line);
-            border-radius: 12px;
-            background: #fafafa;
-            transition: border .2s;
-            outline: none
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: var(--bg)
         }
 
         input:focus,
-        select:focus,
-        textarea:focus {
-            border-color: var(--rose);
-            background: #fff
+        select:focus {
+            outline: 2px solid var(--rose);
+            outline-offset: -1px
         }
 
-        .dlg-actions {
-            display: flex;
-            gap: 8px;
-            margin-top: 16px
-        }
-
-        .dlg-actions button {
-            flex: 1;
-            padding: 12px
-        }
-
-        /* ── LOGIN ── */
-        #login-screen {
-            position: fixed;
-            inset: 0;
-            background: linear-gradient(160deg, #2d0f20 0%, #5c1f3e 50%, #7c3d5e 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            padding: 20px
-        }
-
-        .login-box {
-            background: #fff;
-            border-radius: 28px;
-            padding: 32px 28px;
-            width: 100%;
-            max-width: 380px;
-            box-shadow: 0 32px 80px #00000060
-        }
-
-        .login-logo {
-            text-align: center;
-            font-size: 52px;
-            margin-bottom: 8px
-        }
-
-        .login-title {
-            text-align: center;
-            font-size: 22px;
-            font-weight: 900;
-            color: var(--ink);
-            margin-bottom: 4px
-        }
-
-        .login-sub {
-            text-align: center;
-            font-size: 13px;
-            color: var(--muted);
-            margin-bottom: 24px
-        }
-
-        .login-box input {
-            margin-bottom: 10px;
-            font-size: 15px;
-            padding: 13px 14px
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 14px;
-            font-size: 16px;
+        .nt {
+            padding: 10px;
             border-radius: 14px;
-            margin-top: 6px
+            border: 1px solid var(--line);
+            margin-bottom: 8px;
+            cursor: pointer
         }
 
-        .login-err {
-            color: var(--bad);
-            font-size: 13px;
-            text-align: center;
-            margin-top: 8px;
-            min-height: 20px;
-            font-weight: 600
-        }
-
-        /* ── OFFLINE BAR ── */
-        .off-bar {
-            background: linear-gradient(90deg, var(--gold), var(--gold2));
-            color: #fff;
-            text-align: center;
-            font-size: 12px;
-            padding: 6px;
-            font-weight: 700
-        }
-
-        /* ── BUDGET ITEM ── */
-        .budget-item {
-            padding: 10px 12px;
-            cursor: pointer;
-            border-radius: 12px;
-            margin-bottom: 6px;
-            transition: background .15s
-        }
-
-        .budget-item:hover {
+        .nt.u {
             background: var(--soft)
         }
 
-        .budget-item .bi-name {
-            font-size: 14px;
-            font-weight: 600
-        }
-
-        .budget-item .bi-nums {
+        .off {
+            background: var(--gold);
+            color: #fff;
+            text-align: center;
             font-size: 12px;
-            color: var(--muted);
-            margin-top: 1px
+            padding: 3px
         }
 
-        .budget-item .bi-remain {
-            font-size: 14px;
-            font-weight: 800;
-            color: var(--rose)
-        }
-
-        /* ── SECTION HEADER ── */
-        .sec-head {
-            background: linear-gradient(135deg, var(--soft), #fff);
-            border-radius: 14px;
-            padding: 12px 14px;
-            margin-bottom: 4px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center
-        }
-
-        .sec-head b {
-            font-size: 14px;
-            font-weight: 800
-        }
-
-        .sec-head .sec-nums {
-            font-size: 12px;
-            color: var(--muted);
-            text-align: left
-        }
-
-        /* ── DESKTOP ── */
-        @media(min-width:860px) {
+        @media(min-width:900px) {
             nav {
-                top: 0;
-                bottom: auto;
-                inset-inline: auto 0;
-                width: 90px;
-                height: 100vh;
+                top: 12px;
+                bottom: 12px;
+                inset-inline: auto 12px;
+                width: 92px;
+                max-width: none;
+                margin: 0;
                 flex-direction: column;
                 justify-content: flex-start;
-                border-top: 0;
-                border-inline-start: 1px solid var(--line);
-                box-shadow: none
+                gap: 4px;
+                padding: 10px 6px
             }
 
             nav a {
-                max-width: none;
-                flex: 0;
-                padding: 20px 0
+                padding: 12px 0;
+                flex: 0
             }
 
             body {
-                padding: 0 90px 0 0
+                padding: 0;
+                padding-inline-end: 116px
+            }
+
+            .col {
+                flex: 1 1 0;
+                max-width: none
+            }
+        }
+
+        .ic {
+            vertical-align: -4px;
+            flex: none
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--rose)
+        }
+
+        .top button {
+            color: var(--ink);
+            display: grid;
+            place-items: center
+        }
+
+        .ci {
+            display: inline-grid;
+            place-items: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
+            background: var(--soft);
+            font-size: 18px
+        }
+
+        .chip {
+            display: inline-grid;
+            place-items: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 10px;
+            background: var(--soft);
+            color: var(--rose);
+            margin-inline-end: 4px
+        }
+
+        .chip.ok {
+            color: var(--ok)
+        }
+
+        .chip.late {
+            color: var(--bad)
+        }
+
+        .hero {
+            background: radial-gradient(circle at 12% 18%, #ffffff2e, transparent 42%), radial-gradient(circle at 90% 90%, #e5a35a40, transparent 45%), linear-gradient(135deg, #b0526f, #5e2c55);
+            font-variant-numeric: tabular-nums
+        }
+
+        .hero>.ic {
+            opacity: .9
+        }
+
+        .hero b {
+            letter-spacing: -1px
+        }
+
+        .k {
+            border-inline-start: 4px solid var(--line)
+        }
+
+        .s-doing {
+            border-inline-start-color: var(--gold)
+        }
+
+        .s-done {
+            border-inline-start-color: var(--ok)
+        }
+
+        .s-todo {
+            border-inline-start-color: var(--mut)
+        }
+
+        button {
+            transition: transform .12s, box-shadow .2s
+        }
+
+        button:active {
+            transform: scale(.96)
+        }
+
+        button.p {
+            box-shadow: 0 8px 18px -8px var(--rose)
+        }
+
+        nav a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            transition: background .2s, color .2s
+        }
+
+        nav a span {
+            display: grid;
+            place-items: center
+        }
+
+        .card {
+            transition: box-shadow .2s, transform .2s
+        }
+
+        .grid .card .n,
+        .g2 .card .n {
+            margin-top: 2px
+        }
+
+        .tag {
+            font-weight: 700
+        }
+
+        .bar {
+            height: 7px
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            * {
+                transition: none !important
             }
         }
     </style>
 </head>
 
 <body>
-
-    <!-- Splash: shown instantly while JS boots -->
-    <div id="splash"
-        style="position:fixed;inset:0;background:linear-gradient(160deg,#2d0f20,#5c1f3e,#7c3d5e);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .4s">
-        <div
-            style="width:48px;height:48px;border:4px solid #ffffff30;border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite">
-        </div>
-        <p style="color:#fff;font-family:system-ui;font-size:15px;margin-top:16px;opacity:.8">الفرح 💍</p>
-    </div>
-    <style>
-        @keyframes spin {
-            to {
-                transform: rotate(360deg)
-            }
-        }
-    </style>
-
-    <!-- Login Screen -->
-    <div id="login-screen" style="display:none">
-        <div class="login-box">
-            <div class="login-logo">💍</div>
-            <div class="login-title">الفرح</div>
-            <div class="login-sub">سجّل دخولك للمتابعة</div>
-            <input id="li-email" type="email" placeholder="الإيميل" autocomplete="email">
-            <input id="li-pass" type="password" placeholder="كلمة السر" autocomplete="current-password">
-            <button class="btn p login-btn" onclick="doLogin()">دخول 🔐</button>
-            <div id="li-err" class="login-err"></div>
-        </div>
-    </div>
-
-    <div id="off-bar" class="off-bar" hidden>📵 أوفلاين — التعديلات محفوظة وهتتزامن لما النت يرجع</div>
+    <div id="off" class="off" hidden></div>
+    <div class="top" id="top"></div>
     <main id="app"></main>
     <nav id="nav"></nav>
     <dialog id="dlg"></dialog>
-
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
     <script type="module">
-        const SB_URL = 'https://joxgqdogavgxojpsqpex.supabase.co', SB_KEY = 'sb_publishable_Dzckomof1AJEBSEvQ32Khg_ZmBEqtNv';
-        const WEDDING = '2027-01-22', $ = s => document.querySelector(s), uid = () => crypto.randomUUID();
+        const SB_URL = '', SB_KEY = ''; // ← Supabase Project URL + anon key
+        const $ = s => document.querySelector(s), uid = () => crypto.randomUUID();
         const sb = SB_URL && window.supabase ? supabase.createClient(SB_URL, SB_KEY) : null;
-
+        const P = { 'home': '<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>', 'cal': '<rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/>', 'wallet': '<path d="M19 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0 0 4h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5"/><circle cx="16" cy="14" r="1.2"/>', 'check': '<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>', 'gear': '<path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/>', 'bell': '<path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/>', 'globe': '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/>', 'moon': '<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>', 'sun': '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>', 'plus': '<path d="M12 5v14M5 12h14"/>', 'edit': '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>', 'gem': '<path d="M6 3h12l4 6-10 13L2 9z"/><path d="M11 3 8 9l4 13 4-13-3-6M2 9h20"/>', 'alert': '<path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/>', 'clock': '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>', 'banknote': '<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/>', 'flag': '<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>', 'msg': '<path d="M4 4h16v12H8l-4 4z"/>', 'sync': '<path d="M21 12a9 9 0 0 0-15-6.7L3 8M3 3v5h5M3 12a9 9 0 0 0 15 6.7L21 16M21 21v-5h-5"/>' }; const ic = (n, z = 20) => `<svg class="ic" width="${z}" height="${z}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${P[n]}</svg>`;
+        let L = localStorage.lang || 'ar'; const thm = () => localStorage.theme || (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light'); window.toggleTheme = () => { localStorage.theme = thm() == 'dark' ? 'light' : 'dark'; render() }; const OP = {}, ORD = ['todo', 'doing', 'done'];
         const SEED = [['bride', null, ['فستان العروسة (شامل التعديلات)', 'ميكب وتصفيف الشعر', 'جزمة العروسة', 'الأوضة اللي هتتجهز فيها']],
         ['groom', null, ['بدلة العريس', 'قميص', 'كرافتة', 'الحلاقة والتجهيز', 'جزمة العريس']],
         ['wed', null, ['القاعة', 'البوفيه والأكل', 'السيشن (التصوير)', 'رسوم دخول المأذون', 'مصاريف المأذون', 'منديل كتب الكتاب', 'البصامة']],
-        ['apt', 'المطبخ', ['وحدات المطبخ', 'تركيب الوحدات', 'إضاءة المطبخ']],
+        ['apt', 'المطبخ', ['وحدات المطبخ (يونتس جاهزة)', 'تركيب الوحدات', 'إضاءة المطبخ']],
         ['apt', 'الريسبشن', ['سفرة وكراسي', 'بوفيه', 'ركنة', 'تي في يونت', 'جزامة', 'مراية', 'إضاءة الريسبشن']],
         ['apt', 'أوضة النوم', ['أوضة النوم', 'إضاءة أوضة النوم', 'مرتبة', 'مرتبة تطرية']],
         ['apt', 'الأوضة التانية', ['سرير', 'مكتب', 'دولاب صغير', 'إضاءة الأوضة']],
-        ['men', null, ['تيشريتات', 'قمصان', 'جينز وبناطيل', 'بنطلون رسمي', 'تريننج', 'لبس بيت', 'ملابس داخلية', 'برفان وعناية']],
-        ['move', null, ['إيجار أول شهر + مقدم وتأمين', 'عمولة السمسار', 'نقل العفش', 'توصيلات واشتراكات', 'تنظيف وتجهيز الشقة']],
-        ['res', null, ['احتياطي الطوارئ']],
-        ['month', null, ['الإيجار الشهري', 'الأكل والبقالة', 'الفواتير والإنترنت', 'المواصلات', 'مصروف شخصي للعروسة', 'مصروف شخصي للعريس', 'مساعدة الأهل', 'القسط الشهري', 'ادخار للطوارئ', 'مصاريف متنوعة']]];
-        const SEC = { bride: '👗 العروسة', groom: '🤵 العريس', wed: '💒 الفرح', apt: '🏠 الشقة', men: '👔 لبس الرجالي', move: '🚚 مصاريف أثناء الجواز', res: '🛡️ احتياطي الطوارئ', month: '📅 المصاريف الشهرية' };
-        const ST = { todo: 'لسه', doing: 'شغالين عليها', done: 'تمت' };
-
+        ['men', null, ['تيشريتات', 'قمصان', 'جينز وبناطيل كاجوال', 'بنطلون رسمي', 'تريننج ولبس مريح', 'لبس بيت', 'ملابس داخلية', 'شرابات', 'بيجامات', 'شبشب', 'حذاء كاجوال', 'جاكيت وسويت شريت', 'برفان وعناية شخصية']],
+        ['move', null, ['إيجار أول شهر + مقدم وتأمين الشقة', 'عمولة السمسار', 'نقل العفش', 'توصيلات واشتراكات (كهربا • مياه • نت)', 'تنظيف وتجهيز الشقة']],
+        ['res', null, ['احتياطي الطوارئ']], ['month', null, ['الإيجار الشهري', 'الأكل والبقالة', 'الفواتير والإنترنت', 'المواصلات', 'مصروف شخصي للعروسة', 'مصروف شخصي للعريس', 'مساعدة الأهل', 'القسط الشهري', 'ادخار للطوارئ', 'مصاريف متنوعة']]];
+        const SM = { bride: [1, 'العروسة', '👰'], groom: [2, 'العريس', '🤵'], wed: [3, 'الفرح', '💍'], apt: [4, 'الشقة', '🏠'], men: [5, 'اللبس الرجالي', '👔'], move: [6, 'مصاريف أثناء الجواز', '🚚'], res: [7, 'احتياطي الطوارئ', '🛟'], month: [8, 'المصاريف الشهرية بعد الجواز', '📆'] };
+        const cid = n => `00000000-0000-4000-8000-0000000000${String(n).padStart(2, '0')}`;
+        const I = {
+            home: ['الرئيسية', 'Home'], cal: ['الجدول', 'Schedule'], budget: ['الميزانية', 'Budget'], tasks: ['المهام', 'Tasks'], set: ['الإعدادات', 'Settings'], save: ['حفظ', 'Save'], cancel: ['إلغاء', 'Cancel'], del: ['حذف', 'Delete'],
+            todo: ['لسه', 'Not started'], doing: ['لسه شغالين عليها', 'In progress'], done: ['تمت', 'Completed'], together: ['سوا', 'Together'], avail: ['اللي معانا', 'Available'], need: ['اللي محتاجينه', 'Needed'], diff: ['الفرق', 'Difference'], paid: ['المدفوع', 'Paid'], act: ['فعلي', 'Actual'], est: ['تقديري', 'Estimated'], rem: ['المتبقي', 'Remaining'],
+            left: [n => `باقي ${fmt(n)} يوم`, n => `${n} days left`], today: ['النهارده', 'Today'], late: [n => `متأخر ${fmt(n)} يوم`, n => `${n} days overdue`], toWed: ['يوم على الفرح', 'days to the wedding'],
+            next: ['المهمة الجاية', 'Next task'], overdue: ['متأخرة', 'Overdue'], upcoming: ['جاية', 'Upcoming'], completed: ['مكتملة', 'Completed'], progress: ['التقدم', 'Progress'],
+            addTask: ['مهمة', 'Task'], addItem: ['بند', 'Item'], addCat: ['قسم', 'Category'], cat: ['القسم', 'Category'], item: ['البند', 'Budget item'],
+            needAct: ['لازم تكتب المبلغ الفعلي قبل ما تكتمل المهمة المالية.', 'This financial task cannot be completed until the actual amount is entered.'],
+            confirmDel: ['متأكدين من الحذف؟ هيتحذف كل اللي تحته.', 'Delete? Everything under it will be deleted too.'], askDate: ['إيه تاريخ فرحكم؟', 'What is your wedding date?'],
+            noDay: ['لا توجد مهام لهذا اليوم', 'No tasks for this day'], noTasks: ['لسه مفيش مهام — ضيفوا أول مهمة', 'No tasks yet — add your first one'],
+            title: ['المهمة', 'Task name'], date: ['التاريخ', 'Date'], time: ['الوقت (اختياري)', 'Time (optional)'], status: ['الحالة', 'Status'], who: ['مين المسؤول', 'Assigned to'], notes: ['ملاحظات', 'Notes'], remind: ['تذكير', 'Reminder'], noRem: ['بدون', 'None'], r0: ['يوم المهمة', 'On the day'], r1: ['قبلها بيوم', '1 day before'], r3: ['قبلها بـ٣ أيام', '3 days before'], r7: ['قبلها بأسبوع', '1 week before'],
+            finq: ['هل هي مهمة مالية؟', 'Is this a financial task?'], no: ['لا', 'No'], yes: ['نعم', 'Yes'], name: ['الاسم', 'Name'], icon: ['أيقونة', 'Icon'], by: ['أنشأها', 'Created by'],
+            names: ['الأسماء', 'Names'], me: ['أنا', 'I am'], invite: ['كود الدعوة', 'Invite code'], syncNow: ['مزامنة الآن', 'Sync now'], logout: ['خروج', 'Log out'], wdate: ['تاريخ الفرح', 'Wedding date'], lang: ['اللغة', 'Language'],
+            notifs: ['الإشعارات', 'Notifications'], markAll: ['تعليم الكل كمقروء', 'Mark all as read'], noNotifs: ['مفيش إشعارات', 'Nothing new'], tAct: ['تحديث', 'Update'], tRem: ['تذكير', 'Reminder'], tLate: ['متأخرة', 'Overdue'],
+            offline: ['أوفلاين — التعديلات محفوظة وهتتزامن لما النت يرجع', 'Offline — changes are saved and will sync when you reconnect'],
+            catTotal: ['إجمالي القسم', 'Category total'], itemTotal: ['إجمالي البند', 'Item total'], exNote: ['مش داخل في الإجمالي', 'not in total'], board: ['لوحة المهام', 'Task board'],
+            allSet: ['كل المطلوب اتغطى 🎉', 'Everything needed is covered 🎉'], covered: [x => `معاكم كل المبلغ المطلوب وزيادة ${fmt(x)}`, x => `You have everything needed, with ${x} to spare`],
+            part: [(p, r) => `معاكم ${fmt(p)}٪ من المبلغ المطلوب — فاضل ${fmt(r)}٪`, (p, r) => `You have ${p}% of the amount needed — ${r}% still to cover`],
+            partnote: ['النسبة = اللي معانا ÷ اللي لسه مطلوب دفعه', 'Percent = available ÷ still to pay'], editHave: ['تعديل اللي معانا', 'Edit available money'], have: ['الرصيد (قبل خصم الدفعات)', 'Starting balance (before payments)'], sv: ['مدخرات متوقعة قبل الفرح', 'Expected savings'], bn: ['بونص', 'Bonus'],
+            activity: ['آخر التحديثات', 'Latest activity'], log_addTask: ['أضاف(ت) مهمة', 'added a task'], log_editTask: ['عدّل(ت) مهمة', 'updated a task'], log_doneTask: ['أكمل(ت) المهمة', 'completed'], log_moveTask: ['نقل(ت) المهمة', 'moved'], log_paid: ['دفع(ت)', 'paid'], log_addItem: ['أضاف(ت) بند', 'added an item'], log_editItem: ['عدّل(ت) بند', 'updated an item'], log_addCat: ['أضاف(ت) قسم', 'added a category'],
+            fin: ['مالية', 'Financial'], payst: ['حالة الدفع', 'Payment status'], paidS: ['مدفوعة', 'Paid'], unpaid: ['لسه', 'Unpaid'], noItems: ['ضيفوا بند الأول', 'Add a budget item first'], availNow: ['اللي معانا دلوقتي', 'Available now'], monthly: ['تقديري شهريًا', 'Monthly estimate'], pw: ['كلمة السر', 'Password'], signin: ['دخول', 'Sign in'], signup: ['حساب جديد', 'Create account'], badCode: ['الكود غلط أو المشروع مكتمل', 'Wrong code, or the project already has two people'],
+            fromBal: ['تتدفع من اللي معانا؟', 'Paid from the shared available money?'], first: ['الاسم الأول', 'First name'], second: ['الاسم التاني', 'Second name'], availNote: ['اللي معانا دلوقتي = الرصيد − المدفوعات اللي اتدفعت من الرصيد', 'Available now = starting balance − completed payments taken from it'], spent: ['اتخصم من الرصيد', 'Spent from balance'], inv: ['كود الدعوة (سيبيه فاضي لإنشاء مشروع جديد)', 'Invite code (leave empty to create a new project)'], fiance: ['خطيبي', 'My fiancé(e)']
+        };
+        const tt = (k, ...a) => { const v = (I[k] || [k, k])[L == 'ar' ? 0 : 1]; return typeof v == 'function' ? v(...a) : v };
+        window.tt = tt; const nf = () => L == 'ar' ? 'ar-EG' : 'en-US';
+        const fmt = n => Math.round(+n || 0).toLocaleString(nf());
+        const today = () => { const d = new Date(); return new Date(d.getFullYear(), d.getMonth(), d.getDate()) };
+        const days = s => Math.round((new Date(s + 'T00:00') - today()) / 864e5);
+        const wt = s => { const d = days(s); return d == 0 ? tt('today') : d > 0 ? tt('left', d) : tt('late', -d) };
+        const when = s => days(s) < 0 ? `<span class="late">${wt(s)}</span>` : wt(s);
+        const dstr = s => new Date(s + 'T00:00').toLocaleDateString(L == 'ar' ? 'ar-EG' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+        const cfg = () => K('cfg')[0] || { id: null, data: { a: 'العروسة', b: 'العريس', have: 0, save: 0, bonus: 0 } };
+        const nm = w => w == 't' ? tt('together') : cfg().data[w];
+        const log = (k, n) => save('act', { k, n, by: me, at: new Date().toISOString() });
+        // ---- model: category → item → tasks (legacy records migrate in place, same ids)
+        async function migrate() {
+            let ch = 0; const now = new Date().toISOString(), W = o => { ch = 1; return put({ ...o, updated_at: now, dirty: 1 }) };
+            for (const i of K('item')) { const d = D(i); if (d.sec && !d.cat) { const m = SM[d.sec]; if (!K('cat').some(c => c.id == cid(m[0]))) await W({ id: cid(m[0]), kind: 'cat', data: { name: m[1], icon: m[2], ord: m[0], ex: d.sec == 'month' ? 1 : 0 }, deleted: false }); await W({ ...i, data: { ...d, cat: cid(m[0]) } }) } }
+            for (const p of K('pay')) { const d = D(p); await W({ ...p, kind: 'task', data: { title: tt('paid'), item: d.item, date: d.date, time: '', who: 't', status: 'done', fin: '1', fromBal: '0', est: d.amt, act: d.amt, notes: d.note || '', remind: '', created: now } }) }
+            for (const t of K('task')) if (D(t).fin == null) await W({ ...t, data: { ...D(t), fin: '0', est: 0, act: 0, remind: '' } });
+            if (ch) await load()
+        }
+        const cats = () => K('cat').sort((a, b) => D(a).ord - D(b).ord);
+        const fin = i => K('task').filter(t => D(t).item == i.id && D(t).fin == '1');
+        const eff = t => { const d = D(t); return d.status == 'todo' ? +d.est || 0 : d.status == 'doing' ? (+d.act || +d.est || 0) : (+d.act || 0) };
+        const tot = i => { const f = fin(i), d = D(i), e = +d.est || f.reduce((a, t) => a + (+D(t).est || 0), 0), c = +d.act || (f.length ? f.reduce((a, t) => a + eff(t), 0) : e), p = f.filter(t => D(t).status == 'done').reduce((a, t) => a + (+D(t).act || 0), 0); return { e, c, p, r: Math.max(0, c - p) } };
+        const sum = l => l.reduce((a, i) => { const x = tot(i); return { e: a.e + x.e, c: a.c + x.c, p: a.p + x.p, r: a.r + x.r } }, { e: 0, c: 0, p: 0, r: 0 });
+        const itemsOf = c => K('item').filter(i => D(i).cat == c.id);
+        const need = () => sum(cats().filter(c => !D(c).ex).flatMap(itemsOf));
+        const spent = () => K('task').filter(t => D(t).fin == '1' && D(t).status == 'done' && D(t).fromBal == '1').reduce((a, t) => a + (+D(t).act || 0), 0);
+        const avail = () => { const g = cfg().data; return (+g.have || 0) + (+g.save || 0) + (+g.bonus || 0) - spent() };
+        // ---- dialogs
+        function form(title, f, ok, extra = '') {
+            const d = $('#dlg'); d.innerHTML = `<form method="dialog"><h2>${title}</h2>${f.map(x => `<label class="${x.c || ''}" ${x.h ? 'hidden' : ''}>${x.l}${x.o ? `<select name="${x.k}" ${x.a || ''}>${x.o.map(([v, t]) => `<option value="${v}" ${v == x.v ? 'selected' : ''}>${t}</option>`).join('')}</select>` : `<input name="${x.k}" type="${x.t || 'text'}" value="${x.v ?? ''}">`}</label>`).join('')}${extra}<div class="row" style="margin-top:14px"><button class="p" value="ok">${tt('save')}</button><button value="x">${tt('cancel')}</button></div></form>`;
+            d.querySelector('form').onsubmit = e => { if (e.submitter.value == 'ok' && ok(Object.fromEntries(new FormData(e.target))) === false) e.preventDefault() }; d.showModal()
+        }
+        const delBtn = fn => `<button type="button" class="x" style="margin-top:10px" onclick="if(confirm(tt('confirmDel'))){${fn};dlg.close()}">${tt('del')}</button>`;
+        const itemOpts = () => K('item').map(i => [i.id, `${(K('cat').find(c => c.id == D(i).cat) || { data: {} }).data.name || ''} › ${D(i).name}`]);
+        const whoOpts = () => [['a', nm('a')], ['b', nm('b')], ['t', tt('together')]];
+        const stOpts = () => ORD.map(s => [s, tt(s)]);
+        function addTask(id, preset, itemId) {
+            const t = id ? K('task').find(x => x.id == id) : null, d = t ? D(t) : {}; if (!K('item').length) return alert(tt('noItems')); const f = d.fin == '1';
+            form(t ? d.title : tt('addTask'), [{ k: 'title', l: tt('title'), v: d.title }, { k: 'item', l: tt('item'), o: itemOpts(), v: d.item || itemId }, { k: 'date', l: tt('date'), t: 'date', v: d.date || new Date().toISOString().slice(0, 10) }, { k: 'time', l: tt('time'), t: 'time', v: d.time }, { k: 'who', l: tt('who'), o: whoOpts(), v: d.who || me }, { k: 'status', l: tt('status'), o: stOpts(), v: preset || d.status || 'todo' },
+            { k: 'fin', l: tt('finq'), o: [['0', tt('no')], ['1', tt('yes')]], v: d.fin || '0', a: `onchange="dlg.querySelectorAll('.fm').forEach(e=>e.hidden=this.value!='1')"` }, { k: 'est', l: tt('est'), t: 'number', v: d.est, c: 'fm', h: !f }, { k: 'act', l: tt('act'), t: 'number', v: d.act, c: 'fm', h: !f }, { k: 'fromBal', l: tt('fromBal'), o: [['1', tt('yes')], ['0', tt('no')]], v: d.fromBal || '1', c: 'fm', h: !f },
+            { k: 'remind', l: tt('remind'), o: [['', tt('noRem')], ['0', tt('r0')], ['1', tt('r1')], ['3', tt('r3')], ['7', tt('r7')]], v: d.remind }, { k: 'notes', l: tt('notes'), v: d.notes }],
+                v => {
+                    if (!v.title) return false; if (v.fin == '1' && v.status == 'done' && !+v.act) { alert(tt('needAct')); dlg.querySelector('[name=act]').focus(); return false }
+                    save('task', { ...v, by: d.by || me, created: d.created || new Date().toISOString() }, t && t.id); const fresh = !t; log(v.status == 'done' && d.status != 'done' ? 'doneTask' : fresh ? 'addTask' : 'editTask', v.title); if (v.fin == '1' && v.status == 'done' && d.status != 'done') log('paid', `${fmt(v.act)} — ${v.title}`)
+                },
+                t ? `<div class="sm" style="margin-top:8px">${tt('by')}: ${nm(d.by) || '—'} • ${d.created ? dstr(d.created.slice(0, 10)) : ''}${d.fin == '1' ? ` • ${tt('payst')}: ${d.status == 'done' ? tt('paidS') : tt('unpaid')}` : ''}</div>` + delBtn(`rm(K('task').find(x=>x.id=='${id}'))`) : '')
+        }
+        function addItem(id, catId) {
+            const i = id ? K('item').find(x => x.id == id) : null, d = i ? D(i) : {};
+            form(i ? d.name : tt('addItem'), [{ k: 'name', l: tt('name'), v: d.name }, { k: 'cat', l: tt('cat'), o: cats().map(c => [c.id, D(c).name]), v: d.cat || catId }, { k: 'est', l: tt('est'), t: 'number', v: d.est }, { k: 'act', l: tt('act'), t: 'number', v: d.act }, { k: 'notes', l: tt('notes'), v: d.notes }],
+                v => { if (!v.name) return false; save('item', { ...d, ...v }, i && i.id); log(i ? 'editItem' : 'addItem', v.name) }, i ? delBtn(`delItem('${id}')`) : '')
+        }
+        function editCat(id) { const c = id ? K('cat').find(x => x.id == id) : null, d = c ? D(c) : {}; form(c ? d.name : tt('addCat'), [{ k: 'name', l: tt('name'), v: d.name }, { k: 'icon', l: tt('icon'), v: d.icon || '📁' }], v => { if (!v.name) return false; save('cat', { ord: Date.now(), ...d, ...v }, c && c.id); if (!c) log('addCat', v.name) }, c ? delBtn(`delCat('${id}')`) : '') }
+        const delItem = id => { K('task').filter(t => D(t).item == id).forEach(rm); rm(K('item').find(i => i.id == id)) };
+        const delCat = id => { K('item').filter(i => D(i).cat == id).forEach(i => delItem(i.id)); rm(K('cat').find(c => c.id == id)) };
+        function setStatus(id, st) {
+            const t = K('task').find(x => x.id == id), d = D(t); if (d.status == st) return; if (st == 'done' && d.fin == '1' && !+d.act) { alert(tt('needAct')); return addTask(id, 'done') }
+            save('task', { ...d, status: st }, id); log(st == 'done' ? 'doneTask' : 'moveTask', d.title); if (st == 'done' && d.fin == '1') log('paid', `${fmt(d.act)} — ${d.title}`)
+        }
+        const mv = (id, dir) => { const t = K('task').find(x => x.id == id), i = Math.max(0, Math.min(2, ORD.indexOf(D(t).status) + dir)); setStatus(id, ORD[i]) };
+        let skipD = 0; const askDate = () => { skipD = 1; form(ic('gem', 26), [{ k: 'date', l: tt('askDate'), t: 'date', v: cfg().data.date }], v => { if (!v.date) return false; save('cfg', { ...cfg().data, date: v.date }, cfg().id) }) };
+        const editHave = () => { const g = cfg().data, sp = spent(); form(tt('editHave'), [{ k: 'cur', l: tt('availNow'), t: 'number', v: Math.round(avail()) }, { k: 'save', l: tt('sv'), t: 'number', v: g.save }, { k: 'bonus', l: tt('bn'), t: 'number', v: g.bonus }], v => save('cfg', { ...g, have: (+v.cur || 0) - (+v.save || 0) - (+v.bonus || 0) + sp, save: +v.save || 0, bonus: +v.bonus || 0 }, cfg().id), `<div class="sm" style="margin-top:8px">${tt('availNote')}</div>`) };
+        const editNames = () => form(tt('names'), [{ k: 'a', l: tt('first'), v: cfg().data.a }, { k: 'b', l: tt('second'), v: cfg().data.b }], v => save('cfg', { ...cfg().data, ...v }, cfg().id));
+        const setLang = l => { L = localStorage.lang = l; dlg.close(); render() };
+        const langMenu = () => { dlg.innerHTML = `<h2>${ic('globe', 24)}</h2><div class="row"><button class="p" onclick="setLang('ar')">العربية</button><button class="p" onclick="setLang('en')">English</button></div>`; dlg.showModal() };
+        // ---- notifications
+        const RD = () => new Set(JSON.parse(localStorage.rd || '[]'));
+        function notes() {
+            const o = []; K('task').filter(t => D(t).status != 'done').forEach(t => { const d = D(t), n = days(d.date); if (n < 0) o.push({ k: 'o' + t.id, ty: 'o', tx: `${d.title} — ${wt(d.date)}`, id: t.id }); else if (d.remind !== '' && d.remind != null && n <= +d.remind) o.push({ k: `r${t.id}${d.date}`, ty: 'r', tx: `${d.title} — ${wt(d.date)}`, id: t.id }) });
+            K('act').sort((a, b) => D(b).at > D(a).at ? 1 : -1).slice(0, 25).forEach(a => o.push({ k: a.id, ty: 'a', own: D(a).by == me, tx: D(a).k ? `${nm(D(a).by)} ${tt('log_' + D(a).k)}: ${D(a).n}` : D(a).t })); return o
+        }
+        const openNotes = () => { const rd = RD(); dlg.innerHTML = `<div class="row"><h2>${tt('notifs')}</h2><button onclick="readAll()">${tt('markAll')}</button></div>${notes().map(n => `<div class="nt ${rd.has(n.k) ? '' : 'u'}" onclick="openNote('${n.k}','${n.id || ''}')">${ic({ o: 'alert', r: 'clock', a: 'msg' }[n.ty], 16)} <span class="tag">${tt({ o: 'tLate', r: 'tRem', a: 'tAct' }[n.ty])}</span> ${n.tx}</div>`).join('') || `<div class="sm">${tt('noNotifs')}</div>`}`; dlg.showModal() };
+        const markRead = ks => { const r = RD(); ks.forEach(k => r.add(k)); localStorage.rd = JSON.stringify([...r]) };
+        const readAll = () => { markRead(notes().map(n => n.k)); dlg.close(); render() };
+        const openNote = (k, id) => { markRead([k]); dlg.close(); render(); if (id) setTimeout(() => addTask(id), 50) };
+        // ---- views
+        const arr = d => (d > 0) == (L == 'ar') ? '←' : '→';
+        const tc = (t, b) => { const d = D(t), it = K('item').find(i => i.id == d.item), dn = d.status == 'done'; return `<div class="card k s-${d.status}" ${b ? `draggable="true" ondragstart="event.dataTransfer.setData('text','${t.id}')"` : ''} onclick="addTask('${t.id}')"><b ${dn ? 'style="text-decoration:line-through"' : ''}>${ic(d.fin == '1' ? 'banknote' : 'flag', 16)} ${d.title}</b><div class="sm">${it ? D(it).name + ' • ' : ''}${dstr(d.date)}${d.time ? ' ' + d.time : ''}</div><div class="row sm"><span class="tag">${nm(d.who)}</span>${dn ? '<span class="ok">✓</span>' : when(d.date)}${d.fin == '1' ? `<b>${fmt(d.status == 'todo' ? d.est : (+d.act || +d.est))}</b>` : ''}</div>${b ? `<div class="row" style="margin-top:6px"><button onclick="event.stopPropagation();mv('${t.id}',-1)">${arr(-1)}</button><button onclick="event.stopPropagation();mv('${t.id}',1)">${arr(1)}</button></div>` : ''}</div>` };
+        const pct = (a, b) => b > 0 ? Math.min(100, Math.round(a / b * 100)) : 0;
+        const totRow = (x, l) => `<div class="tot sm"><b>${l}</b><br>${tt('est')}: ${fmt(x.e)} • ${tt('act')}: ${fmt(x.c)} • ${tt('paid')}: ${fmt(x.p)} • ${tt('rem')}: ${fmt(x.r)}<div class="bar"><i style="width:${pct(x.p, x.c)}%"></i></div></div>`;
+        const upc = () => K('task').filter(t => D(t).status != 'done' && days(D(t).date) >= 0).sort((a, b) => (D(a).date + (D(a).time || '') > D(b).date + (D(b).time || '') ? 1 : -1));
+        const V_ = {
+            home() {
+                const n = need(), a = avail(), nx = upc()[0], ts = K('task'), od = ts.filter(t => D(t).status != 'done' && days(D(t).date) < 0), dn = ts.filter(t => D(t).status == 'done').length, wd = cfg().data.date;
+                return `<div class="g2"><div class="card hero">${ic('gem', 20)}<div>${wd ? dstr(wd) : '—'}</div><b>${wd ? fmt(Math.max(0, days(wd))) : '—'}</b>${tt('toWed')}</div>${nx ? `<div class="card" onclick="addTask('${nx.id}')"><div class="sm">${tt('next')}</div><div style="font-size:18px;font-weight:800">${ic(D(nx).fin == '1' ? 'banknote' : 'flag', 18)} ${D(nx).title}</div><div class="sm">${dstr(D(nx).date)}${D(nx).time ? ' ' + D(nx).time : ''}</div><div class="n">${when(D(nx).date)}</div></div>` : ''}</div>
+<div class="qa"><button class="p" onclick="addTask()">${ic('plus', 15)} ${tt('addTask')}</button><button onclick="addItem()">${ic('plus', 15)} ${tt('addItem')}</button><button onclick="editCat()">${ic('plus', 15)} ${tt('addCat')}</button></div>
+${od.length ? `<h2 class="late">${ic('alert', 18)} ${tt('overdue')}</h2>${od.map(t => tc(t)).join('')}` : ''}
+<h2>${ic('wallet', 18)} ${tt('budget')}</h2><div class="grid"><div class="card" style="cursor:pointer" onclick="editHave()">${tt('avail')} ${ic('edit', 14)}<div class="n">${fmt(a)}</div></div><div class="card">${tt('need')}<div class="n">${fmt(n.r)}</div></div><div class="card">${tt('paid')}<div class="n">${fmt(n.p)}</div></div><div class="card">${tt('diff')}<div class="n ${a - n.r < 0 ? 'late' : 'ok'}">${fmt(a - n.r)}</div></div></div>
+<div class="card" style="margin-top:8px"><div class="sm">${cover(a, n.r)}</div><div class="bar"><i style="width:${pct(a, n.r)}%"></i></div></div>
+<div class="grid" style="grid-template-columns:repeat(3,1fr)"><div class="card"><span class="chip ok">${ic('check', 16)}</span> ${tt('completed')}<div class="n">${fmt(dn)}</div></div><div class="card"><span class="chip">${ic('clock', 16)}</span> ${tt('upcoming')}<div class="n">${fmt(upc().length)}</div></div><div class="card"><span class="chip late">${ic('alert', 16)}</span> ${tt('overdue')}<div class="n ${od.length ? 'late' : ''}">${fmt(od.length)}</div></div></div>
+<h2>${tt('activity')}</h2>${notes().filter(x => x.ty == 'a').slice(0, 5).map(x => `<div class="sm">• ${x.tx}</div>`).join('')}`
+            },
+            cal() {
+                const b = new Date(today().getFullYear(), today().getMonth() + CM, 1), y = b.getFullYear(), m = b.getMonth(), dim = new Date(y, m + 1, 0).getDate(), p2 = n => String(n).padStart(2, '0'), off = L == 'ar' ? (b.getDay() + 1) % 7 : b.getDay(), wd = cfg().data.date;
+                const ev = {}; K('task').forEach(t => (ev[D(t).date] ??= []).push(t));
+                let c = [0, 1, 2, 3, 4, 5, 6].map(i => `<div class="h">${new Date(2024, 0, (L == 'ar' ? 6 : 7) + i).toLocaleDateString(nf(), { weekday: 'narrow' })}</div>`).join('') + '<div></div>'.repeat(off);
+                for (let d = 1; d <= dim; d++) { const s = `${y}-${p2(m + 1)}-${p2(d)}`; c += `<div class="${ev[s] ? 'd ' : ''}${s == CD ? 's ' : ''}${s == wd ? 'w' : ''}" onclick="selDay('${s}')">${fmt(d)}</div>` }
+                const ds = (ev[CD] || []).sort((a, b) => (D(a).time || '') > (D(b).time || '') ? 1 : -1);
+                return `<div class="row"><button onclick="cm(-1)">${L == 'ar' ? '›' : '‹'}</button><b>${b.toLocaleDateString(nf(), { month: 'long', year: 'numeric' })}</b><button onclick="cm(1)">${L == 'ar' ? '‹' : '›'}</button></div><div class="card cal" style="margin-top:8px">${c}</div>${CD ? `<h2>${ic('cal', 18)} ${dstr(CD)}</h2>${ds.map(t => `<div class="sm">${D(t).time || ''}</div>${tc(t)}`).join('') || `<div class="card sm">${tt('noDay')}</div>`}<button class="p" onclick="addTask()">${ic('plus', 15)} ${tt('addTask')}</button>` : ''}`
+            },
+            budget() {
+                const n = need(), a = avail(); let h = `<div class="grid"><div class="card" style="cursor:pointer" onclick="editHave()">${tt('avail')} ${ic('edit', 14)}<div class="n">${fmt(a)}</div></div><div class="card">${tt('need')}<div class="n">${fmt(n.r)}</div></div></div><div class="card row" style="margin-top:8px"><b>${tt('diff')}</b><span class="n ${a - n.r < 0 ? 'late' : 'ok'}">${fmt(a - n.r)}</span></div><div class="card"><div>${cover(a, n.r)}</div><div class="bar"><i style="width:${pct(a, n.r)}%"></i></div><div class="sm">${tt('partnote')}</div><div class="sm">${tt('availNote')} (${fmt(spent())})</div></div><div class="qa"><button onclick="editHave()">${tt('editHave')}</button><button class="p" onclick="editCat()">${ic('plus', 15)} ${tt('addCat')}</button></div>`;
+                for (const c of cats()) {
+                    const its = itemsOf(c), x = sum(its);
+                    h += `<details class="card" ${OP[c.id] ? 'open' : ''} ontoggle="OP['${c.id}']=this.open"><summary class="row"><b class="row" style="justify-content:flex-start"><span class="ci">${D(c).icon || '📁'}</span> ${D(c).name}</b><span class="sm">${D(c).ex ? tt('exNote') : fmt(x.r)}</span></summary>
+${its.map(i => {
+                        const tk = K('task').filter(t => D(t).item == i.id).sort((a, b) => D(a).date > D(b).date ? 1 : -1); return `<details ${OP[i.id] ? 'open' : ''} ontoggle="OP['${i.id}']=this.open"><summary class="row"><span>${D(i).sub ? `<span class="tag">${D(i).sub}</span> ` : ''}${D(i).name}</span><b>${fmt(tot(i).r)}</b></summary>
+${tk.map(t => `<div class="tk row" onclick="addTask('${t.id}')"><span>${D(t).status == 'done' ? '✓' : '○'} ${D(t).title}</span><span class="sm">${D(t).fin == '1' ? fmt(D(t).status == 'todo' ? D(t).est : (+D(t).act || +D(t).est)) : ''}</span></div>`).join('')}
+${totRow(tot(i), tt('itemTotal'))}<div class="row"><button onclick="addTask(null,null,'${i.id}')">${ic('plus', 15)} ${tt('addTask')}</button><button onclick="addItem('${i.id}')">${ic('edit', 14)}</button></div></details>`
+                    }).join('')}
+${totRow(x, tt('catTotal'))}<div class="row"><button onclick="addItem(null,'${c.id}')">${ic('plus', 15)} ${tt('addItem')}</button><button onclick="editCat('${c.id}')">${ic('edit', 14)}</button></div></details>`
+                } return h
+            },
+            tasks() { return `<button class="p" onclick="addTask()">${ic('plus', 15)} ${tt('addTask')}</button><h2>${tt('board')}</h2><div class="board">${ORD.map(s => `<div class="col" ondragover="event.preventDefault()" ondrop="event.preventDefault();setStatus(event.dataTransfer.getData('text'),'${s}')"><h3>${tt(s)} (${fmt(K('task').filter(t => D(t).status == s).length)})</h3>${K('task').filter(t => D(t).status == s).sort((a, b) => D(a).date > D(b).date ? 1 : -1).map(t => tc(t, 1)).join('')}</div>`).join('')}</div>` },
+            set() {
+                return `<div class="card"><b>${tt('wdate')}</b><br><button onclick="askDate()">${cfg().data.date ? dstr(cfg().data.date) : '—'}</button></div><div class="card"><button onclick="editNames()">${tt('names')}</button><label>${tt('me')}<select onchange="setMe(this.value)">${whoOpts().slice(0, 2).map(([v, t]) => `<option value="${v}" ${v == me ? 'selected' : ''}>${t}</option>`).join('')}</select></label></div>
+<div class="card"><button onclick="langMenu()">${ic('globe', 16)} ${tt('lang')}</button></div><div class="card"><b>${tt('invite')}</b><div class="n">${code || '—'}</div></div><div class="card"><button onclick="sync()">${ic('sync', 16)} ${tt('syncNow')}</button> ${sb ? `<button class="x" onclick="sb.auth.signOut().then(()=>{localStorage.clear();location.reload()})">${tt('logout')}</button>` : ''}</div>`
+            }
+        };
+        const cover = (a, n) => n <= 0 ? tt('allSet') : a >= n ? tt('covered', a - n) : tt('part', pct(a, n), 100 - pct(a, n));
+        let CM = 0, CD = new Date().toISOString().slice(0, 10);
+        function render() {
+            document.documentElement.dataset.theme = thm(); $('meta[name=theme-color]').content = thm() == 'dark' ? '#16111a' : '#b0526f'; document.documentElement.lang = L; document.documentElement.dir = L == 'ar' ? 'rtl' : 'ltr';
+            const u = notes().filter(n => !n.own && !RD().has(n.k)).length;
+            $('#top').innerHTML = `<b class="logo">${ic('gem', 22)} ${L == 'ar' ? 'الفرح' : 'Wedding'}</b><span><button onclick="toggleTheme()">${ic(thm() == 'dark' ? 'sun' : 'moon', 19)}</button><button onclick="langMenu()">${ic('globe', 19)}</button><button onclick="openNotes()">${ic('bell', 19)}${u ? `<span class="bd">${fmt(u)}</span>` : ''}</button></span>`;
+            $('#app').innerHTML = V_[V](); $('#nav').innerHTML = [['home', 'home'], ['cal', 'cal'], ['budget', 'wallet'], ['tasks', 'check'], ['set', 'gear']].map(([k, i]) => `<a class="${V == k ? 'on' : ''}" onclick="nav('${k}')"><span>${ic(i, 22)}</span>${tt(k)}</a>`).join('');
+            $('#off').textContent = tt('offline'); if (cfg().id && !cfg().data.date && !$('#dlg').open && !skipD) askDate()
+        }
+        const offl = () => $('#off').hidden = navigator.onLine; addEventListener('online', () => { offl(); sync() }); addEventListener('offline', offl); offl();
         const db = await new Promise(r => { const q = indexedDB.open('farah', 1); q.onupgradeneeded = () => q.result.createObjectStore('r', { keyPath: 'id' }); q.onsuccess = () => r(q.result) });
         const tx = (m, f) => new Promise(r => { const t = db.transaction('r', m), q = f(t.objectStore('r')); t.oncomplete = () => r(q.result) });
-        let R = [], V = 'home', CM = 0, CD = null, wid = localStorage.wid || null, code = localStorage.code || '', me = localStorage.me || 'a';
-        const load = async () => { R = (await tx('readonly', s => s.getAll())).filter(r => !r.deleted) };
-        const K = k => R.filter(r => r.kind == k), D = r => r.data;
+        let R = [], V = 'home', wid = localStorage.wid || null, code = localStorage.code || '', me = localStorage.me || 'a';
+        const load = async () => { R = (await tx('readonly', s => s.getAll())).filter(r => !r.deleted) }, K = k => R.filter(r => r.kind == k), D = r => r.data;
         const put = o => tx('readwrite', s => s.put(o));
         const save = async (kind, data, id) => { await put({ id: id || uid(), kind, data, updated_at: new Date().toISOString(), deleted: false, dirty: 1 }); await load(); render(); sync() };
         const rm = async r => { await put({ ...r, deleted: true, updated_at: new Date().toISOString(), dirty: 1 }); await load(); render(); sync() };
-        const cfg = () => K('cfg')[0] || { id: null, data: { a: 'العروسة', b: 'العريس', have: 0, save: 0, bonus: 0 } };
-        const nm = w => w == 't' ? 'سوا' : cfg().data[w];
-        const log = t => save('act', { t: `${nm(me)} ${t}`, at: new Date().toISOString() });
-
         async function sync() {
             if (!sb || !wid || !navigator.onLine) return; try {
                 const all = await tx('readonly', s => s.getAll()), dirty = all.filter(r => r.dirty);
                 if (dirty.length) { const { error } = await sb.from('records').upsert(dirty.map(({ dirty: _, ...r }) => ({ ...r, wedding_id: wid }))); if (error) throw error; for (const r of dirty) await put({ ...r, dirty: 0 }) }
                 const { data, error } = await sb.from('records').select('*').eq('wedding_id', wid); if (error) throw error;
                 const loc = Object.fromEntries((await tx('readonly', s => s.getAll())).map(r => [r.id, r]));
-                for (const r of data) { const l = loc[r.id]; if (!l || (!l.dirty && r.updated_at > l.updated_at)) await put({ ...r, dirty: 0 }) }
-                await load(); render()
+                for (const r of data) { const l = loc[r.id]; if (!l || (!l.dirty && r.updated_at > l.updated_at) || (l.dirty && r.updated_at > l.updated_at)) await put({ ...r, dirty: 0 }) }
+                await load(); await migrate(); render()
             } catch (e) { console.warn('sync', e) }
         }
 
-        // helpers
-        const fmt = n => Math.round(n || 0).toLocaleString('ar-EG');
-        const today = () => { const d = new Date(); return new Date(d.getFullYear(), d.getMonth(), d.getDate()) };
-        const days = s => Math.round((new Date(s + 'T00:00') - today()) / 864e5);
-        const when = s => { const d = days(s); return d == 0 ? '<b>النهارده</b>' : d > 0 ? `باقي ${fmt(d)} يوم` : `<span class="late">متأخر ${fmt(-d)} يوم</span>` };
-        const dstr = s => new Date(s + 'T00:00').toLocaleDateString('ar-EG', { day: 'numeric', month: 'long', year: 'numeric' });
-        const cost = i => +(D(i).act || D(i).est) || 0, paid = i => K('pay').filter(p => D(p).item == i.id).reduce((a, p) => a + (+D(p).amt || 0), 0);
-        const sum = l => l.reduce((a, i) => ({ e: a.e + (+D(i).est || 0), c: a.c + cost(i), p: a.p + paid(i) }), { e: 0, c: 0, p: 0 });
-        const items = s => K('item').filter(i => D(i).sec == s);
-        const need = () => sum(K('item').filter(i => D(i).sec != 'month'));
-        const pct = (a, b) => b ? Math.min(100, Math.round(a / b * 100)) : 0;
-
-        // modal form
-        function form(title, fields, ok, extra = '') {
-            const d = $('#dlg');
-            d.innerHTML = `<div class="dlg-inner"><div class="dlg-title">${title}</div><form method="dialog">
-  ${fields.map(x => `<label>${x.l}</label>${x.o
-                ? `<select name="${x.k}">${x.o.map(([v, t]) => `<option value="${v}" ${v == x.v ? 'selected' : ''}>${t}</option>`).join('')}</select>`
-                : `<input name="${x.k}" type="${x.t || 'text'}" value="${x.v ?? ''}" placeholder="${x.l}">`
-                }`).join('')}${extra}
-  <div class="dlg-actions"><button class="p" value="ok">💾 حفظ</button><button value="x">إلغاء</button></div>
-  </form></div>`;
-            d.querySelector('form').onsubmit = e => { if (e.submitter.value == 'ok') ok(Object.fromEntries(new FormData(e.target))) };
-            d.showModal();
+        Object.assign(window, {
+            rm, K, D, dlg: $('#dlg'), sb, sync, render, addTask, addItem, editCat, delItem, delCat, mv, setStatus, askDate, editHave, editNames, setLang, langMenu, openNotes, readAll, openNote,
+            OP, setMe: v => { localStorage.me = me = v; render() }, nav: v => { V = v; render() }, cm: d => { CM += d; render() }, selDay: s => { CD = s; render() }
+        });
+        // ---- start / auth
+        function login() {
+            return new Promise(res => {
+                const draw = () => {
+                    dlg.innerHTML = `<h2>${ic('gem', 28)}</h2><label>Email<input id="em" type="email" autocomplete="email"></label><label>${tt('pw')}<input id="pw" type="password" autocomplete="current-password"></label><div id="er" class="late sm"></div><div class="row" style="margin-top:12px"><button class="p" id="si">${tt('signin')}</button><button id="su">${tt('signup')}</button><button id="lg">${ic('globe', 16)}</button></div>`;
+                    const go = async up => { const c = { email: $('#em').value.trim(), password: $('#pw').value }, r = up ? await sb.auth.signUp(c) : await sb.auth.signInWithPassword(c); if (r.error) $('#er').textContent = r.error.message; else { dlg.close(); res() } };
+                    $('#si').onclick = () => go(0); $('#su').onclick = () => go(1); $('#lg').onclick = () => { L = localStorage.lang = L == 'ar' ? 'en' : 'ar'; document.documentElement.dir = L == 'ar' ? 'rtl' : 'ltr'; draw() }
+                };
+                dlg.oncancel = e => e.preventDefault(); draw(); dlg.showModal()
+            })
         }
-
-        const itemOpts = () => [['', '— بدون —'], ...K('item').filter(i => D(i).sec != 'month').map(i => [i.id, D(i).name])];
-        const whoOpts = () => [['a', nm('a')], ['b', nm('b')], ['t', 'سوا']];
-
-        // actions
-        const addTask = t => form(t ? '✏️ تعديل مهمة' : '✅ مهمة جديدة',
-            [{ k: 'title', l: 'المهمة', v: t && D(t).title }, { k: 'date', l: 'التاريخ', t: 'date', v: t && D(t).date },
-            { k: 'time', l: 'الوقت (اختياري)', t: 'time', v: t && D(t).time }, { k: 'who', l: 'مين المسؤول', o: whoOpts(), v: t ? D(t).who : me },
-            { k: 'status', l: 'الحالة', o: Object.entries(ST), v: t ? D(t).status : 'todo' }, { k: 'notes', l: 'ملاحظات', v: t && D(t).notes }],
-            v => { if (!v.title) return; save('task', v, t && t.id); log((t ? 'عدّلت مهمة: ' : 'أضاف/ت مهمة: ') + v.title) });
-
-        const addItem = (i, sec) => form(i ? '✏️ تعديل بند' : '💰 بند جديد',
-            [{ k: 'name', l: 'البند', v: i && D(i).name }, { k: 'sec', l: 'القسم', o: Object.entries(SEC), v: i ? D(i).sec : sec || 'bride' },
-            { k: 'est', l: 'التكلفة التقديرية (جنيه)', t: 'number', v: i && D(i).est }, { k: 'act', l: 'التكلفة الفعلية (جنيه)', t: 'number', v: i && D(i).act },
-            { k: 'notes', l: 'ملاحظات', v: i && D(i).notes }],
-            v => { if (!v.name) return; save('item', { ...(i ? D(i) : {}), ...v, sub: i ? D(i).sub : null }, i && i.id); log(`${i ? 'عدّلت' : 'أضاف/ت'} بند: ${v.name}`) });
-
-        const addPay = it => form('💳 دفعة جديدة',
-            [{ k: 'item', l: 'البند', o: itemOpts().slice(1), v: it && it.id }, { k: 'amt', l: 'المبلغ (جنيه)', t: 'number' },
-            { k: 'date', l: 'التاريخ', t: 'date', v: new Date().toISOString().slice(0, 10) }, { k: 'note', l: 'ملاحظة' }],
-            v => { if (!+v.amt) return; save('pay', v); log(`دفع/ت ${fmt(v.amt)} جنيه`) });
-
-        const openItem = id => {
-            const i = K('item').find(x => x.id == id), ps = K('pay').filter(p => D(p).item == id);
-            const remain = cost(i) - paid(i);
-            form(`💰 ${D(i).name}`,
-                [{ k: 'est', l: 'التقديري (جنيه)', t: 'number', v: D(i).est }, { k: 'act', l: 'الفعلي (جنيه)', t: 'number', v: D(i).act }, { k: 'notes', l: 'ملاحظات', v: D(i).notes }],
-                v => { save('item', { ...D(i), ...v }, id); log('عدّلت ميزانية ' + D(i).name) },
-                `<div style="margin-top:14px"><div style="font-weight:800;font-size:13px;margin-bottom:8px">الدفعات</div>
-    ${ps.map(p => `<div class="row sm" style="padding:6px 0;border-bottom:1px solid var(--line)">${dstr(D(p).date)} — <b>${fmt(D(p).amt)} جنيه</b>${D(p).note ? ` (${D(p).note})` : ''}<a onclick="rm(K('pay').find(x=>x.id=='${p.id}'))" style="cursor:pointer;color:var(--bad)">🗑</a></div>`).join('') || '<div class="sm" style="padding:8px 0">لسه مفيش دفعات</div>'}
-    <div class="row" style="margin-top:10px;padding-top:10px;border-top:1.5px solid var(--line)">
-      <span><b style="color:${remain < 0 ? 'var(--ok)' : 'var(--rose)'}">${remain <= 0 ? '✅ مدفوع بالكامل' : 'متبقي ' + fmt(remain) + ' جنيه'}</b></span>
-      <a class="btn" onclick="$('#dlg').close();addPay(K('item').find(x=>x.id=='${id}'))">+ دفعة</a>
-    </div>`)
+        const seedAll = async (a, b, dirty) => {
+            const now = new Date().toISOString(); for (const [sec, sub, l] of SEED) for (const name of l) await put({ id: uid(), kind: 'item', data: { sec, sub, name, est: 0, act: 0 }, updated_at: now, deleted: false, dirty });
+            await put({ id: uid(), kind: 'cfg', data: { a, b, have: 0, save: 0, bonus: 0 }, updated_at: now, deleted: false, dirty })
         };
-
-        Object.assign(window, { rm, K, D, addPay, $, dlg: $('#dlg') });
-
-        // views
-        const statusBadge = s => ({ todo: '<span class="task-status status-todo">لسه</span>', doing: '<span class="task-status status-doing">شغالين</span>', done: '<span class="task-status status-done">✓ تمت</span>' })[s] || '';
-
-        const taskRow = t => {
-            const d = D(t); return `<div class="task-row ${d.status == 'done' ? 'done-row' : ''}" onclick="addTask(K('task').find(x=>x.id=='${t.id}'))">
-  <div style="flex:1;min-width:0"><b>${d.title}</b><div class="sm" style="margin-top:3px">${d.date ? dstr(d.date) : ''}${d.time ? ' • ' + d.time : ''} • <span class="tag">${nm(d.who)}</span></div></div>
-  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">${statusBadge(d.status)}<span class="sm">${d.status != 'done' && d.date ? when(d.date) : ''}</span></div>
-</div>`};
-
-        const V_ = {
-            home() {
-                const T = K('task').filter(t => D(t).status != 'done').sort((a, b) => D(a).date > D(b).date ? 1 : -1);
-                const n = need(), ts = K('task'), dn = ts.filter(t => D(t).status == 'done').length, late = T.filter(t => D(t).date && days(D(t).date) < 0);
-                const g = cfg().data, have = (+g.have || 0) + (+g.save || 0) + (+g.bonus || 0);
-                return `<div class="card hero-card">
-      <div class="sm" style="color:#ffffff99;margin-bottom:4px">💍 ${dstr(WEDDING)}</div>
-      <span class="days-big">${fmt(Math.max(0, days(WEDDING)))}</span>
-      <div class="days-label">يوم على الفرح</div>
-    </div>
-    <div class="qa">
-      <button class="p" onclick="addTask()">+ مهمة</button>
-      <button onclick="addItem()">+ بند</button>
-      <button class="g" onclick="addPay()">+ دفعة</button>
-      <button onclick="nav('cal')">📅 الجدول</button>
-    </div>
-    <div class="stats">
-      <div class="stat-card"><div class="stat-label">إجمالي الميزانية</div><div class="stat-val rose">${fmt(n.c)}</div></div>
-      <div class="stat-card"><div class="stat-label">المدفوع</div><div class="stat-val ok">${fmt(n.p)}</div></div>
-      <div class="stat-card"><div class="stat-label">المتبقي للدفع</div><div class="stat-val gold">${fmt(n.c - n.p)}</div></div>
-      <div class="stat-card"><div class="stat-label">الفرق عن المتاح</div><div class="stat-val ${have - n.c < 0 ? 'bad' : 'ok'}">${fmt(have - n.c)}</div></div>
-    </div>
-    <div class="card">
-      <div class="prog-wrap"><div class="prog-label"><span>المهام المكتملة</span><span>${dn}/${ts.length}</span></div><div class="bar ok-bar"><i style="width:${pct(dn, ts.length)}%"></i></div></div>
-      <div class="prog-wrap"><div class="prog-label"><span>المدفوع من الميزانية</span><span>${pct(n.p, n.c)}%</span></div><div class="bar"><i style="width:${pct(n.p, n.c)}%"></i></div></div>
-    </div>
-    <h2>📋 المهام الجاية ${late.length ? `<span class="late sm">(${fmt(late.length)} متأخرة)</span>` : ''}</h2>
-    ${T.slice(0, 5).map(taskRow).join('') || '<div class="card sm" style="text-align:center;padding:20px">مفيش مهام — ضيفوا أول مهمة 🎉</div>'}
-    <h2>📜 آخر التحديثات</h2>
-    <div class="card">${K('act').sort((a, b) => D(b).at > D(a).at ? 1 : -1).slice(0, 6).map(a => `<div class="sm" style="padding:5px 0;border-bottom:1px solid var(--line)">• ${D(a).t}</div>`).join('') || '<div class="sm">لا يوجد تحديثات</div>'}</div>`;
-            },
-            cal() {
-                const b = new Date(today().getFullYear(), today().getMonth() + CM, 1), y = b.getFullYear(), m = b.getMonth();
-                const dim = new Date(y, m + 1, 0).getDate(), off = (b.getDay() + 1) % 7, p2 = n => String(n).padStart(2, '0');
-                const ev = {};
-                K('task').forEach(t => D(t).date && (ev[D(t).date] ??= []).push(`✅ ${D(t).title}`));
-                K('pay').forEach(p => D(p).date && (ev[D(p).date] ??= []).push(`💰 ${fmt(D(p).amt)} جنيه`));
-                (ev[WEDDING] ??= []).push('💍 يوم الفرح');
-                let c = ['س', 'ح', 'ن', 'ث', 'ر', 'خ', 'ج'].map(x => `<div class="h">${x}</div>`).join('') + '<div></div>'.repeat(off);
-                for (let d = 1; d <= dim; d++) { const s = `${y}-${p2(m + 1)}-${p2(d)}`; c += `<div class="${ev[s] ? 'd ' : ''}${s == CD ? 's ' : ''}${s == WEDDING ? 'w' : ''}" onclick="CD='${s}';render()">${d}</div>` }
-                return `<div class="card" style="margin-bottom:0">
-      <div class="row" style="margin-bottom:12px"><button onclick="cm(-1)" style="padding:8px 14px">›</button><b>${b.toLocaleDateString('ar-EG', { month: 'long', year: 'numeric' })}</b><button onclick="cm(1)" style="padding:8px 14px">‹</button></div>
-      <div class="cal">${c}</div>
-    </div>
-    ${CD ? `<h2>📅 ${dstr(CD)} — ${when(CD)}</h2>${(ev[CD] || ['مفيش حاجة في اليوم ده']).map(e => `<div class="card">${e}</div>`).join('')}<button class="p" onclick="addTask()">+ مهمة في هذا اليوم</button>` : ''}`;
-            },
-            budget() {
-                const g = cfg().data, have = (+g.have || 0) + (+g.save || 0) + (+g.bonus || 0), n = need();
-                let h = `<div class="stats">
-      <div class="stat-card"><div class="stat-label">اللي معانا</div><div class="stat-val ok">${fmt(have)}</div></div>
-      <div class="stat-card"><div class="stat-label">اللي محتاجينه</div><div class="stat-val rose">${fmt(n.c)}</div></div>
-    </div>
-    <div class="card row"><b>الفرق</b><span style="font-size:20px;font-weight:900;color:${have - n.c < 0 ? 'var(--bad)' : 'var(--ok)'}">${fmt(have - n.c)} جنيه</span></div>
-    <div class="qa" style="margin-bottom:12px"><button onclick="editHave()">✏️ تعديل المتاح</button><button class="p" onclick="addItem()">+ بند جديد</button></div>`;
-                for (const [s, t] of Object.entries(SEC)) {
-                    const l = items(s), x = sum(l);
-                    if (!l.length && s != 'month') continue;
-                    h += `<div class="sec-head"><b>${t}</b><div class="sec-nums">${s == 'month' ? '(مش داخلة في الإجمالي)' : `مدفوع ${fmt(x.p)} من ${fmt(x.c)}`}</div></div>
-      <div class="card" style="padding:8px 12px">
-      ${s != 'month' && x.c ? `<div class="prog-wrap"><div class="prog-label"><span>نسبة المدفوع</span><span>${pct(x.p, x.c)}%</span></div><div class="bar"><i style="width:${pct(x.p, x.c)}%"></i></div></div>` : ''} 
-      ${l.map(i => s == 'month'
-                        ? `<div class="budget-item row" onclick="addItem(K('item').find(x=>x.id=='${i.id}'))"><span class="bi-name">${D(i).name}</span><span class="bi-nums">تقديري ${fmt(D(i).est)} • فعلي ${fmt(D(i).act)} جنيه</span></div>`
-                        : `<div class="budget-item" onclick="openItem('${i.id}')"><div class="row"><span class="bi-name">${D(i).sub ? `<span class="tag">${D(i).sub}</span> ` : ''}${D(i).name}</span><span class="bi-remain">${cost(i) - paid(i) > 0 ? `${fmt(cost(i) - paid(i))} جنيه` : '✅ مكتمل'}</span></div><div class="bar" style="margin-top:6px"><i style="width:${pct(paid(i), cost(i))}%"></i></div></div>`
-                    ).join('') || '<div class="sm" style="padding:8px 0;text-align:center">لا يوجد بنود — اضغط + بند جديد</div>'}
-      </div>`;
-                }
-                return h;
-            },
-            tasks() {
-                return `<div class="qa" style="margin-bottom:8px"><button class="p" onclick="addTask()">+ مهمة جديدة</button></div>` +
-                    ['todo', 'doing', 'done'].map(s => `<h2>${{ todo: '⏳', doing: '🔄', done: '✅' }[s]} ${ST[s]}</h2>` +
-                        (K('task').filter(t => D(t).status == s).sort((a, b) => D(a).date > D(b).date ? 1 : -1).map(taskRow).join('') || `<div class="card sm" style="text-align:center;padding:16px">لا يوجد مهام هنا</div>`)).join('');
-            },
-            set() {
-                return `<div class="card"><b>👤 الحساب والأسماء</b><br><br>
-      <button onclick="editNames()">✏️ تعديل الأسماء</button>
-      <label>أنا<select onchange="localStorage.me=me=this.value;render()">${whoOpts().slice(0, 2).map(([v, t]) => `<option value="${v}" ${v == me ? 'selected' : ''}>${t}</option>`).join('')}</select></label></div>
-    <div class="card"><b>🔗 كود الدعوة</b><div style="font-size:28px;font-weight:900;letter-spacing:4px;margin:8px 0;color:var(--rose)">${code || (sb ? '—' : 'وضع محلي')}</div><div class="sm">ابعت الكود لشريكك علشان يدخل التطبيق</div></div>
-    <div class="card row"><button onclick="sync()">🔄 مزامنة الآن</button>${sb ? `<button class="x" onclick="sb.auth.signOut().then(()=>{localStorage.clear();location.reload()})">🚪 خروج</button>` : ''}</div>`;
-            }
-        };
-
-        const editNames = () => form('👤 الأسماء', [{ k: 'a', l: 'اسم الطرف الأول', v: cfg().data.a }, { k: 'b', l: 'اسم الطرف التاني', v: cfg().data.b }], v => save('cfg', { ...cfg().data, ...v }, cfg().id));
-        const editHave = () => { const g = cfg().data; form('💰 اللي معانا', [{ k: 'have', l: 'المبلغ المتاح حاليًا (جنيه)', t: 'number', v: g.have }, { k: 'save', l: 'مدخرات متوقعة قبل الفرح (جنيه)', t: 'number', v: g.save }, { k: 'bonus', l: 'بونص أو مبلغ إضافي (جنيه)', t: 'number', v: g.bonus }], v => save('cfg', { ...g, ...v }, cfg().id)) };
-
-        Object.assign(window, { addTask, addItem, openItem, editNames, editHave, sync, render: () => render(), nav: v => { V = v; render() }, CD: null });
-
-        function render() {
-            $('#app').innerHTML = V_[V]();
-            $('#nav').innerHTML = [['home', '🏠', 'الرئيسية'], ['cal', '📅', 'الجدول'], ['budget', '💰', 'الميزانية'], ['tasks', '✅', 'المهام'], ['set', '⚙️', 'الإعدادات']]
-                .map(([k, i, t]) => `<a class="${V == k ? 'on' : ''}" onclick="nav('${k}')"><span class="ico">${i}</span>${t}</a>`).join('');
-        }
-
-        Object.defineProperty(window, 'CD', { get: () => CD, set: v => CD = v });
-        window.cm = d => { CM += d; render() }; window.sb = sb;
-
-        const offl = () => $('#off-bar').hidden = navigator.onLine;
-        addEventListener('online', () => { offl(); sync() }); addEventListener('offline', offl); offl();
-
-        // LOGIN
-        window.doLogin = async () => {
-            const e = $('#li-email').value.trim(), p = $('#li-pass').value;
-            if (!e || !p) { $('#li-err').textContent = 'من فضلك ادخل الإيميل وكلمة السر'; return }
-            $('#li-err').textContent = 'جاري الدخول...';
-            const { error } = await sb.auth.signInWithPassword({ email: e, password: p });
-            if (error) { $('#li-err').textContent = '❌ الإيميل أو كلمة السر غلط'; return }
-            $('#login-screen').style.display = 'none';
-            boot();
-        };
-        // allow enter key
-        document.addEventListener('keydown', e => { if (e.key == 'Enter' && !$('#login-screen').hidden) doLogin() });
-
         async function setupWedding() {
-            let n = await new Promise(r => form('أهلاً 💍', [{ k: 'n', l: 'اسمك' }, { k: 'c', l: 'كود الدعوة (اتركه فاضي لإنشاء مشروع جديد)' }], r));
+            const n = await new Promise(r => form(ic('gem', 26), [{ k: 'n', l: tt('name') }, { k: 'c', l: tt('inv') }], r));
             const { data, error } = n.c ? await sb.rpc('join_wedding', { c: n.c.trim(), n: n.n }) : await sb.rpc('create_wedding', { n: n.n });
-            if (error) return alert('الكود غلط أو مكتمل');
-            wid = localStorage.wid = data.id; code = localStorage.code = data.code;
-            if (!n.c) {
-                for (const [sec, sub, l] of SEED) for (const name of l) await put({ id: uid(), kind: 'item', data: { sec, sub, name, est: 0, act: 0 }, updated_at: new Date().toISOString(), deleted: false, dirty: 1 });
-                await put({ id: uid(), kind: 'cfg', data: { a: n.n, b: '', have: 0, save: 0, bonus: 0 }, updated_at: new Date().toISOString(), deleted: false, dirty: 1 }); localStorage.me = 'a';
-            } else localStorage.me = me = 'b';
-            await sync();
+            if (error) { alert(tt('badCode')); return setupWedding() } wid = localStorage.wid = data.id; code = localStorage.code = data.code;
+            if (!n.c) { await seedAll(n.n, tt('fiance'), 1); localStorage.me = me = 'a' } else localStorage.me = me = 'b'; await sync()
         }
-
         async function boot() {
-            await load();
+            await load(); await migrate();
             if (sb) {
-                const { data: { session } } = await sb.auth.getSession();
-                if (!session) { hideSplash(); $('#login-screen').style.display = 'flex'; return }
-                if (session && !wid) { const { data: m } = await sb.from('members').select('wedding_id,weddings(code)').limit(1); if (m?.[0]) { wid = localStorage.wid = m[0].wedding_id; code = localStorage.code = m[0].weddings.code } else await setupWedding(); await load() }
-                sb.channel('r').on('postgres_changes', { event: '*', schema: 'public', table: 'records' }, sync).subscribe(); sync();
-            } else if (!K('item').length) {
-                for (const [sec, sub, l] of SEED) for (const name of l) await put({ id: uid(), kind: 'item', data: { sec, sub, name, est: 0, act: 0 }, updated_at: new Date().toISOString(), deleted: false, dirty: 0 });
-                await put({ id: uid(), kind: 'cfg', data: { a: 'العروسة', b: 'العريس', have: 0, save: 0, bonus: 0 }, updated_at: '', deleted: false, dirty: 0 }); await load();
+                let { data: { session } } = await sb.auth.getSession(); if (!session && !wid) { await login(); session = (await sb.auth.getSession()).data.session }
+                if (session && !wid) { const { data: m } = await sb.from('members').select('wedding_id,weddings(code)').limit(1); if (m?.[0]) { wid = localStorage.wid = m[0].wedding_id; code = localStorage.code = m[0].weddings.code; localStorage.me = me = m[0].wedding_id ? me : 'a' } else await setupWedding(); await load(); await migrate() }
+                sb.channel('r').on('postgres_changes', { event: '*', schema: 'public', table: 'records' }, sync).subscribe(); sync()
             }
-            render();
+            else if (!K('item').length && !K('cfg').length) { await seedAll('العروسة', 'العريس', 0); await load(); await migrate() }
+            render()
         }
-
-        const hideSplash = () => { const s = $('#splash'); if (!s) return; s.style.opacity = '0'; setTimeout(() => s.remove(), 450); };
-        boot().then(hideSplash);
-        if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+        boot(); if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
     </script>
 </body>
 
